@@ -5,12 +5,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Zogori</title>
-        
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
 
         <link rel="stylesheet" href="style.css" />
-        <!-- <script src="main.js" defer></script> -->
+        <script src="main.js" defer></script>
     </head>
     <body>
         <!-- header -->
@@ -22,17 +24,68 @@
 
         <!-- container, menu bar and main screen -->
         <div id="container">
-            <ul class="container_menu">
-                <li class="menu_item">Evaluation</li>
-                <li class="menu_item">QnA</li>
-                <li class="menu_item">About</li>
-            </ul>
+            <nav class="container_menu">
+                <ul class="menu">
+                    <li class="menu_item">Evaluation</li>
+                    <li class="menu_item">QnA</li>
+                    <li class="menu_item">About</li>
+                </ul>
+            </nav>
 
             <div class="container_main">
-                <div class="upload">upload</div>
+                <div class="evaluation">
+                    <h2>EVALUATION</h2>
+                    <form method="post">
+                        <div class="languageSelect">
+                            <span>Select Language</span>
+                            <input
+                                type="radio"
+                                id="c/c++"
+                                class="language"
+                                name="language"
+                                checked
+                            />
+                            <label for="c/c++">c/c++</label>
+                            <input
+                                type="radio"
+                                id="python"
+                                class="language"
+                                name="language"
+                            />
+                            <label for="python">python</label>
+                            <input
+                                type="radio"
+                                id="java"
+                                class="language"
+                                name="language"
+                            />
+                            <label for="java">java</label>
+                        </div>
+                        <div>
+                            <div class="upload">
+                                <label class="upload" for="file_uploads"
+                                    >choose file</label
+                                >
+                                <input
+                                    type="file"
+                                    id="file_uploads"
+                                    name="file_uploads"
+                                    accept=".c, .cpp, .py, .java"
+                                />
+                            </div>
+                        </div>
+                        <div class="preview">
+                            <p>No files currently selected for upload</p>
+                        </div>
+                    </form>
+                </div>
                 <div class="score">
-                    <div class="size scoreContainer"></div>
-                    <div class="complexity scoreContainer"></div>
+                    <div class="size scoreContainer">
+                        <span>file size</span>
+                    </div>
+                    <div class="complexity scoreContainer">
+                        <span>complexity</span>
+                    </div>
                 </div>
             </div>
         </div>

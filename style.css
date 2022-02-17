@@ -62,10 +62,11 @@ body {
 }
 
 /* menu */
-.container_menu {
+.menu {
     list-style: none;
     padding-left: 0;
-    margin: 20px 0;
+    padding: 20px 0;
+    margin: 0;
 }
 
 .menu_item {
@@ -76,25 +77,92 @@ body {
     font-weight: var(--weight-semi-bold);
 }
 
+.menu_item:hover {
+    text-decoration: underline;
+}
+
 /* main */
 .container_main {
-    margin: 28px;
+    display: block;
+    padding: 16px;
+    margin: auto;
+    text-align: center;
+    max-width: 1200px;
+}
+
+.evaluation {
+    display: block;
+    /* height: 100px; */
 }
 
 .upload {
-    display: block;
-    height: 100px;
-    background-color: yellow;
+    background-color: var(--color-grey);
+    width: fit-content;
+    margin: auto;
+    margin-top: 8px;
+    padding: 4px;
+    border-radius: 5px;
+    color: white;
+    font-size: var(--font-regular);
+}
+
+.upload:hover {
+    background-color: var(--color-dark-grey);
+    cursor: pointer;
+}
+
+#file_uploads {
+    display: none;
+}
+
+.preview {
+    font-weight: bold;
 }
 
 .score {
     display: flex;
+    justify-content: space-around;
 }
 
 .scoreContainer {
     margin: 16px;
     width: 200px;
     height: 200px;
+    padding: 16px;
     background-color: var(--color-light-sky);
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.score span {
+    font-size: var(--font-medium);
+    font-weight: bolder;
+    color: var(--color-dark-grey);
+}
+
+/* For below 768px screen width */
+@media screen and (max-width: 768px) {
+    :root {
+        /* Font size */
+        --font-large: 30px;
+        --font-medium: 18px;
+        --font-regular: 16px;
+        --font-small: 14px;
+        --font-micro: 12px;
+    }
+
+    #container{
+        display: block;
+    }
+
+    .container_menu{     
+        align-items: center;
+        width: 100%;
+    }
+
+    .menu{
+        justify-content: space-between;   
+        display: flex;
+        margin: 0px 40px;
+    }
 }
