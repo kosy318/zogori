@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,14 +6,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Zogori</title>
-
         <link
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
             rel="stylesheet"
         />
-
-        <link rel="stylesheet" href="style.css" />
-        <script src="main.js" defer></script>
+        <link rel="stylesheet" href="/css/style.css" />
+       <!-- <script src="main.js" defer></script> -->
     </head>
     <body>
         <!-- header -->
@@ -35,7 +34,6 @@
             <div class="container_main">
                 <div class="evaluation">
                     <h2>EVALUATION</h2>
-                    <form method="post">
                         <div class="languageSelect">
                             <span>Select Language</span>
                             <input
@@ -63,20 +61,12 @@
                         </div>
                         <div>
                             <div class="upload">
-                                <label class="upload" for="file_uploads"
-                                    >choose file</label
-                                >
-                                <input
-                                    type="file"
-                                    id="file_uploads"
-                                    name="file_uploads"
-                                    accept=".c, .cpp, .py, .java"
-                                />
+                                <form action="/uploadFile" enctype="multipart/form-data" method="post">
+                                  <input type="file" name="attachment">
+                                  <button type="submit" class="btn btn-primary">Upload</button>
                             </div>
                         </div>
-                        <div class="preview">
-                            <p>No files currently selected for upload</p>
-                        </div>
+
                     </form>
                 </div>
                 <div class="score">
@@ -94,3 +84,9 @@
         <div id="footer"></div>
     </body>
 </html>
+
+
+
+
+
+
