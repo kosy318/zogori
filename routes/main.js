@@ -4,15 +4,20 @@ const router   = express.Router();
 const multer   = require('multer');
 
 const upload = multer({ dest: 'uploadedFiles/' });
+
+//child process module
 const fread = require('child_process').execFile;
+
+
 router.get('/', function(req,res){
   res.render('upload');
 });
 
+//file upload post
 router.post('/uploadFile', upload.single('attachment'), function(req,res){
-  console.log(req.file.filename);
+   //exec file and callback result page
    const fread = execFile('fileReadLoc.exe',[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
-    res.render('confirmation', { output:stdout });
+    res.render('result', { output:stdout });
   })
 
 });

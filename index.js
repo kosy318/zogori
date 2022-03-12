@@ -6,14 +6,13 @@ const fs        = require('fs');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
-// Routes => main 실행 
+//Routes 
 app.use('/', require('./routes/main'));
 
-// Port setting
+//Port setting
 var port = 3000;
 app.listen(port, function(){
   var dir = './uploadedFiles';
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-
   console.log('server on! http://localhost:'+port);
 });
