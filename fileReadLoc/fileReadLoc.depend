@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1647075578 source:c:\users\admin\onedrive\¹®¼­\github\filereadloc\main.cpp
+	<fstream>
+	<iostream>
+	<string>
+
