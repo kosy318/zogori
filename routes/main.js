@@ -1,4 +1,5 @@
-const { execFile } = require('child_process');
+//const { execFile } = require('child_process');
+const { exec } = require('child_process');
 const express  = require('express');
 const router   = express.Router();
 const multer   = require('multer');
@@ -6,7 +7,8 @@ const multer   = require('multer');
 const upload = multer({ dest: 'uploadedFiles/' });
 
 //child process module
-const fread = require('child_process').execFile;
+//const fread = require('child_process').execFile;
+const fread = require('child_process').exec;
 
 
 router.get('/', function(req,res){
@@ -17,8 +19,8 @@ router.get('/', function(req,res){
 router.post('/uploadFile', upload.single('attachment'), function(req,res){
    //exec file and callback result page
    //const fread = execFile('fileReadLoc.exe',[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
-    const fread = execFile('test',[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
-      console.log(stdout);
+    const fread = exec(`./testfile uploadedFiles/${req.file.filename}`,function(error,stdout,stderr){
+      console.log(error, stdout, stderr);
       res.render('result', { output:stdout });
   })
 
