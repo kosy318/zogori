@@ -18,7 +18,8 @@ router.post('/uploadFile', upload.single('attachment'), function(req,res){
    //exec file and callback result page
    //const fread = execFile('fileReadLoc.exe',[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
     const fread = execFile('test',[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
-    res.render('result', { output:stdout });
+      console.log(stdout);
+      res.render('result', { output:stdout });
   })
 
 });
