@@ -8,21 +8,30 @@ lexer = lex.lex(module=tokrules) #, debug=1)
 lexer.num_count = 0 # set initial number count
 
 # Test it out
-data = '''  int a = 0;
-            int b = 0;
-            a = a + b;
-            b = a / b;
-                string str = "string working";
-            for(int i=0; i<3; i++){
-                a += b;
-            } //what do you want>?
-            /*
-             testing comment
-            */
-            
-            
-            
-            '''
+data = ''
+with open("..\\fileReadLoc\\main.cpp", 'r') as file:
+    for line in file.readlines():
+        data += line
+
+# file = sys.argv[1]
+# for line in file.readlines():
+#     data += line
+
+
+# data = '''  #include <iostream>
+#             using namespace std;
+#             int a = 0;
+#             int b = 0;
+#             a = a + b;
+#             b = a / b;
+#                 string str = "string working";
+#             for(int i=0; i<3; i++){
+#                 a += b;
+#             } //what do you want>?
+#             /*
+#              testing comment
+#             */
+#             '''
 
 # Give the lexer some input
 lexer.input(data)

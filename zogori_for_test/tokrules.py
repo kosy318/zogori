@@ -30,7 +30,6 @@ reserved = {
 tokens = [
     'ENTER',
     'CCODE',
-    'COMMENT',
     'MAIN',
     'ID',
     'NUMBER',
@@ -56,6 +55,19 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_SEMICOLON = r';'
 
+
+def t_include(t):
+    r'\#include.*'
+    # print(t.value)
+    pass
+
+
+def t_namespace(t):
+    r'using.*'
+    # print(t.value)
+    pass
+
+
 id = r'[a-zA-Z_][a-zA-Z_0-9]*'
 function = r'' + id + '\((.|\n)*?\)'
 
@@ -69,8 +81,6 @@ def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
-
-
 
 # this rule matches numbers and convers the string into a python integer.
 def t_NUMBER(t):
@@ -97,6 +107,7 @@ def t_NUMBER(t):
 # a string containing ignored characters(spaces and tabs)
 # write in string
 t_ignore = ' \t\n'
+t_ccode_ignore = ' \t\n'
 
 
 # Error handling rule
@@ -155,10 +166,6 @@ def t_ccode_char(t):
 # Any sequence of non-whitespace characters (not braces, strings)
 def t_ccode_nonspace(t):
     r'[^\s\{\}\'\"]+'
-
-
-# Ignored characters (whitespace)
-t_ccode_ignore = " \t\n"
 
 
 # For bad characters, we just skip over it
