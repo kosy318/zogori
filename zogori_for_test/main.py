@@ -61,3 +61,4 @@ while True:
 LOC = data.count('\n')
 # print('-'*40)
 print('LOC :', LOC)
+print('this is python')
