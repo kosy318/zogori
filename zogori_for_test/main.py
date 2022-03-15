@@ -60,5 +60,5 @@ while True:
 
 LOC = data.count('\n')
 # print('-'*40)
-print('LOC :', LOC)
-print('this is python')
+print('LOC :', LOC, '\n')
+print('testing server by soo')
