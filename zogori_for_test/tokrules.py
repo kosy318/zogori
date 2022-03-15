@@ -28,9 +28,7 @@ reserved = {
 
 # list of token names. this is always required
 tokens = [
-    'ENTER',
     'CCODE',
-    'MAIN',
     'ID',
     'NUMBER',
     'ARITHMETIC_OP',
@@ -85,7 +83,6 @@ def t_ID(t):
 # this rule matches numbers and convers the string into a python integer.
 def t_NUMBER(t):
     r'\d+'
-    t.lexer.num_count += 1
     t.value = int(t.value)
     return t
 
