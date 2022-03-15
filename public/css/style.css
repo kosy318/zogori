@@ -129,15 +129,27 @@ body {
     width: 200px;
     height: 200px;
     padding: 16px;
-    background-color: var(--color-light-sky);
+    background-color: var(--color-light-white);
     border-radius: 10px;
     overflow: hidden;
 }
 
-.score span {
+.score table {
+    width: 100%;
+}
+
+.score th {
     font-size: var(--font-medium);
     font-weight: bolder;
     color: var(--color-dark-grey);
+    text-align: center;
+    padding: 5px;
+    border-bottom: 2px solid var(--color-dark-grey);
+}
+
+.score td {
+    padding: 16px;
+    text-align: left;
 }
 
 /* For below 768px screen width */
@@ -151,22 +163,22 @@ body {
         --font-micro: 12px;
     }
 
-    #container{
+    #container {
         display: block;
     }
 
-    .container_menu{     
+    .container_menu {
         align-items: center;
         width: 100%;
     }
 
-    .menu{
-        justify-content: space-between;   
+    .menu {
+        justify-content: space-between;
         display: flex;
         margin: 0px 40px;
     }
 }
 
-a{
+a {
     text-decoration-line: none;
 }

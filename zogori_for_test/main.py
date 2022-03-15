@@ -1,21 +1,19 @@
 import ply.lex as lex
 import tokrules
+import sys
 
-global num_count
 # Build the lexer
 lexer = lex.lex(module=tokrules) #, debug=1)
 
-lexer.num_count = 0 # set initial number count
-
 # Test it out
 data = ''
-with open("..\\fileReadLoc\\main.cpp", 'r') as file:
-    for line in file.readlines():
-        data += line
+# with open("..\\fileReadLoc\\main.cpp", 'r') as file:
+#     for line in file.readlines():
+#         data += line
 
-# file = sys.argv[1]
-# for line in file.readlines():
-#     data += line
+file = sys.argv[1]
+for line in file.readlines():
+    data += line
 
 
 # data = '''  #include <iostream>
