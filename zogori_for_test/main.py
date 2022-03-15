@@ -2,6 +2,10 @@ import ply.lex as lex
 import tokrules
 import sys
 
+# make python exe file
+# on powerShell : pip install pyinstaller
+# on powerShell : pyinstaller -F main.py tokrules.py
+
 # Build the lexer
 lexer = lex.lex(module=tokrules) #, debug=1)
 
@@ -11,10 +15,10 @@ data = ''
 #     for line in file.readlines():
 #         data += line
 
-file = sys.argv[1]
-for line in file.readlines():
-    data += line
-
+read_file = sys.argv[1]
+with open(read_file, 'r') as file:
+    for line in file.readlines():
+        data += line
 
 # data = '''  #include <iostream>
 #             using namespace std;
@@ -49,11 +53,11 @@ while True:
         result[tok.type].append(tok.value)
 
 
-for keys in result.keys():
-    print(f'{keys: <15}{len(result[keys]): <5}')
-    for val in result[keys]:
-        print(f'{" "*10}>>   {val}')
+# for keys in result.keys():
+#     print(f'{keys: <15}{len(result[keys]): <5}')
+#     for val in result[keys]:
+#         print(f'{" "*10}>>   {val}')
 
 LOC = data.count('\n')
-print('-'*40)
+# print('-'*40)
 print('LOC :', LOC)
