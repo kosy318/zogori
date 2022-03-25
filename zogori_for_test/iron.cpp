@@ -6,6 +6,7 @@ int graph[26][26] = {0,};
 int max_ans = 0;
 string ans = "";
 string path = "";
+vector<int> vec = {};
 
 void dfs(int cur, int cost) {
     if(graph[cur][0] > 0 && cost + graph[cur][0] > max_ans) {
@@ -37,7 +38,7 @@ void dfs(int cur, int cost) {
 }
 int main() {
     int N,M;
-    ifstream in("iron.inp");
+    ifstream in("iron.inp");    // iorn.inp
     ofstream out("iron.out");
     in >> N >> M;
     
@@ -50,7 +51,14 @@ int main() {
         graph[u][v] = w;
         graph[v][u] = w;
     }
-    
+
+    /*
+        testing comment
+    */
+
+
+
+
     visit[0] = 1;
     dfs(0, 0);
     
