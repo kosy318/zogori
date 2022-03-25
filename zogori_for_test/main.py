@@ -111,7 +111,7 @@ for ele in inside_n2:
         N_2 += len(result[ele])
 
 # print(f'nested {lexer.nested}')
-print(f'n_1 = {n_1}, n_2 = {n_2}, N_1 = {N_1}, N_2 = {N_2}')
+# print(f'n_1 = {n_1}, n_2 = {n_2}, N_1 = {N_1}, N_2 = {N_2}')
 
 vocabulary = n_1 + n_2
 length = N_1 + N_2
@@ -120,11 +120,11 @@ volume = length * math.log2(vocabulary)
 difficulty = (n_1 / 2) * (N_2 / n_2)
 effort = difficulty * volume
 
-print(f'''Program vocabulary: {vocabulary}<br>
-Program length: {length}<br>
-Calculated estimated program length: {estimated_length}<br>
-Volume: {volume}<br>
-Difficulty: {difficulty}<br>
-Effort: {effort}<br>''')
-print(f'LOC : {LOC}<br>')
+print(f'''{'Program vocabulary':<25}: {vocabulary}<br>
+{'Program length':<25}: {length}<br>
+{'Estimated program length':<25}: {estimated_length}<br>
+{'Volume':<25}: {volume}<br>
+{'Difficulty':<25}: {difficulty}<br>
+{'Effort':<25}: {effort}<br><br>''')
 print(f'CCM : {CCM}<br>')
+print(f'LOC : {LOC}<br>')
