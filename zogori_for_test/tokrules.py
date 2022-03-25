@@ -120,12 +120,12 @@ def t_FUNCTION(t):
     return t
 
 
-# variable = r'[a-zA-Z<>]*'+'\s'+id
-# @TOKEN(variable)
-# def t_VARIABLE(t):
-#     # print(t.value)
-#     t.type = reserved.get(t.value, 'VARIABLE')
-#     return t
+variable = r'[a-zA-Z]+[<>a-zA-Z]*'+'\s'+id
+@TOKEN(variable)
+def t_VARIABLE(t):
+    # print(t.value)
+    t.type = reserved.get(t.value, 'VARIABLE')
+    return t
 
 
 # a regular expression rule with some action code
