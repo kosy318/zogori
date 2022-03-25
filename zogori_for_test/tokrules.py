@@ -24,7 +24,6 @@ reserved = {
 tokens = [
     'INCLUDE',
     'NAMESPACE',
-    'ENTER',
     'FUNCTION',
     'VARIABLE',
     'ID',
@@ -37,8 +36,6 @@ tokens = [
     'NUMBER',
     'OPERATION',
     'COMMA',
-    'EQ',
-    'DOUBLE_EQ',
     'BRACE',
     'LPAREN',
     'RPAREN',
@@ -49,10 +46,8 @@ tokens = [
     'CHAR_VALUE',
 ] + list(reserved.values())
 
-t_OPERATION = r'[<>+\-*\/%|&!~^:]+'
+t_OPERATION = r'[<>+\-*\/%|&!~^:=]+'
 t_COMMA = r','
-t_DOUBLE_EQ = r'=='
-t_EQ = r'='
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LINDEX = r'\['

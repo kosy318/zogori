@@ -12,6 +12,8 @@ import sys
 lexer = lex.lex(module=tokrules)  # , debug=1)
 lexer.nested = []
 
+data = ''
+LOC = 0
 # Test it out
 # with open("iron.cpp", 'r') as file:
 #     comment_start = False
@@ -33,8 +35,6 @@ lexer.nested = []
 #             data += line
 #             LOC += 1
 
-data = ''
-LOC = 0
 read_file = sys.argv[1]
 with open(read_file, 'r') as file:
     comment_start = False
@@ -60,7 +60,7 @@ with open(read_file, 'r') as file:
 # Give the lexer some input
 lexer.input(data)
 
-decision_func = ['IF', 'ELSE_IF', 'ELSE', 'WHILE', 'SWITCH', 'FOR']
+decision_func = ['IF', 'ELSE_IF', 'WHILE', 'SWITCH', 'FOR']
 
 result = {'CCM': [], 'DOT_OP': [], }
 # Tokenize
@@ -95,7 +95,7 @@ CCM = len(result['CCM']) + 1
 
 n_1 = 0
 N_1 = 0
-inside_n1 = ['BRACE', 'RPAREN', 'LINDEX', 'RINDEX', 'FUNCTION', 'OPERATION', 'VARIABLE', 'SEMICOLON', 'COMMA', 'DOT_OP']
+inside_n1 = ['IF', 'ELSE_IF', 'ELSE', 'WHILE', 'SWITCH', 'FOR', 'BRACE', 'RPAREN', 'LINDEX', 'RINDEX', 'FUNCTION', 'OPERATION', 'VARIABLE', 'SEMICOLON', 'COMMA', 'DOT_OP']
 for ele in inside_n1:
     if ele in result.keys():
         # print(list(set(result[ele])))
