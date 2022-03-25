@@ -111,7 +111,7 @@ for ele in inside_n2:
         N_2 += len(result[ele])
 
 # print(f'nested {lexer.nested}')
-print(f'n_1 = {n_1}, n_2 = {n_2}, N_1 = {N_1}, N_2 = {N_2}')
+print(f'n_1 = {n_1}, n_2 = {n_2}, N_1 = {N_1}, N_2 = {N_2}<br>')
 
 vocabulary = n_1 + n_2
 length = N_1 + N_2
