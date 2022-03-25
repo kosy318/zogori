@@ -82,7 +82,7 @@ def t_else_if(t):
 
 
 def t_else(t):
-    r'if'
+    r'else'
     t.type = reserved.get(t.value, 'ELSE')
     return t
 
@@ -106,7 +106,7 @@ def t_for(t):
 
 
 id = r'[a-zA-Z_][a-zA-Z_0-9]*'
-function = r'[.]?' + id + '\('#'(.|\n)*?\)'
+function = r'([.]?' + id + '\()|(\.'+id+')|(cin)|(cout)'#'(.|\n)*?\)'
 
 
 @TOKEN(function)
@@ -115,7 +115,7 @@ def t_FUNCTION(t):
     return t
 
 
-variable = r'[a-zA-Z]+[<>a-zA-Z]*'+'\s'+id
+variable = r'([a-zA-Z]+<.*>[\s]*'+id+')|([a-zA-Z]+'+'\s'+id+')'
 @TOKEN(variable)
 def t_VARIABLE(t):
     # print(t.value)

@@ -41,7 +41,7 @@ int main() {
     ifstream in("iron.inp");    // iorn.inp
     ofstream out("iron.out");
     in >> N >> M;
-    
+
     for(int i=0; i<M; i++) {
         char u,v;
         int w;
@@ -61,15 +61,15 @@ int main() {
 
     visit[0] = 1;
     dfs(0, 0);
-    
+
     out << max_ans << "\n";
     for(auto v : ans) {
         out << v << " ";
     }
-    
+
     in.close();
     out.close();
-    
+
     return 0;
 }
 

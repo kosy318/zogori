@@ -15,28 +15,7 @@ lexer.nested = []
 data = ''
 LOC = 0
 # Test it out
-# with open("iron.cpp", 'r') as file:
-#     comment_start = False
-#     comment_end = False
-#     for line in file.readlines():
-#         enter = re.fullmatch("[ \t\n]+", line)
-#         one_line_comment = re.match("^[ \t]*//.*", line)
-#         if not comment_start:
-#             comment_start = re.match("^[ \t]*/(\*).*", line)
-#         comment_end = re.match("^[ \t]*(\*)/.*", line)
-#         if not comment_end and comment_start:
-#             continue
-#         elif comment_end and comment_start:
-#             comment_end = False
-#             comment_start = False
-#             continue
-#
-#         if not enter and not one_line_comment:
-#             data += line
-#             LOC += 1
-
-read_file = sys.argv[1]
-with open(read_file, 'r') as file:
+with open("iron.cpp", 'r') as file:
     comment_start = False
     comment_end = False
     for line in file.readlines():
@@ -56,13 +35,34 @@ with open(read_file, 'r') as file:
             data += line
             LOC += 1
 
+# read_file = sys.argv[1]
+# with open(read_file, 'r') as file:
+#     comment_start = False
+#     comment_end = False
+#     for line in file.readlines():
+#         enter = re.fullmatch("[ \t\n]+", line)
+#         one_line_comment = re.match("^[ \t]*//.*", line)
+#         if not comment_start:
+#             comment_start = re.match("^[ \t]*/(\*).*", line)
+#         comment_end = re.match("^[ \t]*(\*)/.*", line)
+#         if not comment_end and comment_start:
+#             continue
+#         elif comment_end and comment_start:
+#             comment_end = False
+#             comment_start = False
+#             continue
+#
+#         if not enter and not one_line_comment:
+#             data += line
+#             LOC += 1
+
 
 # Give the lexer some input
 lexer.input(data)
 
 decision_func = ['IF', 'ELSE_IF', 'WHILE', 'SWITCH', 'FOR']
 
-result = {'CCM': [], 'DOT_OP': [], }
+result = {'CCM': [], 'DOT_OP': [], 'ID': [],}
 # Tokenize
 while True:
     tok = lexer.token()
@@ -76,7 +76,9 @@ while True:
         result[tok.type].append(tok.value)
 
     if tok.type == 'VARIABLE':
-        result['VARIABLE'][-1] = result['VARIABLE'][-1].split()[0]
+        var = result['VARIABLE'][-1]
+        result['VARIABLE'][-1] = ''.join(var.split()[:-1])
+        result['ID'].append(var.split()[-1])
 
     if tok.type in decision_func:
         result['CCM'].append(tok.value)
@@ -85,10 +87,10 @@ while True:
         result['DOT_OP'].append('.')
 
 
-# for keys in result.keys():
-#     print(f'{keys: <15}{len(result[keys]): <5}<br>')
-#     for val in result[keys]:
-#         print(f'{" " * 10}>>   {val}<br>')
+for keys in result.keys():
+    print(f'{keys: <15}{len(result[keys]): <5}<br>')
+    for val in result[keys]:
+        print(f'{" " * 10}>>   {val}<br>')
 
 LOC -= (len(result['INCLUDE']) + len(result['NAMESPACE']))
 CCM = len(result['CCM']) + 1
