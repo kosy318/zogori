@@ -11,46 +11,50 @@ states = (
 )
 
 reserved = {
-    'if': 'IF',
     'then': 'THEN',
-    'else': 'ELSE',
-    'while': 'WHILE',
-    'switch': 'SWITCH',
-    'for': 'FOR',
 
+    'void': 'VOID',
     'int': 'INT',
     'vector': 'VECTOR',
     'char': 'CHAR',
     'string': 'STRING',
 }
 
-
-
 # list of token names. this is always required
 tokens = [
     'CCODE',
     'ID',
+    'IF',
+    'ELSE_IF',
+    'ELSE',
+    'WHILE',
+    'SWITCH',
+    'FOR',
     'NUMBER',
-    'ARITHMETIC_OP',
+    'OPERATION',
     'EQ',
     'DOUBLE_EQ',
     'LESS_THAN',
     'GREATER_THAN',
     'LPAREN',
     'RPAREN',
+    'LINDEX',
+    'RINDEX',
     'SEMICOLON',
     'STRING_VALUE',
     'FUNCTION',
+    'CCM',
 ] + list(reserved.values())
 
-
-t_ARITHMETIC_OP = r'[+\-*\/]'
+t_OPERATION = r'[+\-*\/%|&!~^].'
 t_DOUBLE_EQ = r'=='
 t_EQ = r'='
 t_LESS_THAN = '<'
 t_GREATER_THAN = '>'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
+t_LINDEX = r'\['
+t_RINDEX = r'\]'
 t_SEMICOLON = r';'
 
 
@@ -66,19 +70,58 @@ def t_namespace(t):
     pass
 
 
+def t_if(t):
+    r'if'
+    t.type = reserved.get(t.value, 'IF')
+    return t
+
+
+def t_else_if(t):
+    r'else if'
+    t.type = reserved.get(t.value, 'ELSE_IF')
+    return t
+
+
+def t_else(t):
+    r'if'
+    t.type = reserved.get(t.value, 'ELSE')
+    return t
+
+
+def t_while(t):
+    r'while'
+    t.type = reserved.get(t.value, 'WHILE')
+    return t
+
+
+def t_switch(t):
+    r'switch'
+    t.type = reserved.get(t.value, 'SWITCH')
+    return t
+
+
+def t_for(t):
+    r'for'
+    t.type = reserved.get(t.value, 'FOR')
+    return t
+
+
 id = r'[a-zA-Z_][a-zA-Z_0-9]*'
 function = r'' + id + '\((.|\n)*?\)'
+
 
 @TOKEN(function)
 def t_FUNCTION(t):
     t.type = reserved.get(t.value, 'FUNCTION')
     return t
 
+
 # a regular expression rule with some action code
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
+
 
 # this rule matches numbers and convers the string into a python integer.
 def t_NUMBER(t):
@@ -109,7 +152,7 @@ t_ccode_ignore = ' \t\n'
 
 # Error handling rule
 def t_error(t):
-    print('illegal character "%s"' %t.value[0])
+    print('illegal character "%s"<br>' % t.value[0])
     t.lexer.skip(1)
 
 
@@ -129,11 +172,12 @@ def t_ccode_lbrace(t):
 
 def t_ccode_rbrace(t):
     r'\}'
+    t.lexer.nested.append(t.lexer.level)
     t.lexer.level -= 1
 
     # If closing brace, return the code fragment
     if t.lexer.level == 0:
-        t.value = t.lexer.lexdata[t.lexer.code_start:t.lexer.lexpos + 1]
+        t.value = t.lexer.lexdata[t.lexer.code_start+1:t.lexer.lexpos-1]
         t.type = "CCODE"
         t.lexer.begin('INITIAL')
         return t

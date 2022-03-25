@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,10 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Zogori</title>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/css/style.css" />
     </head>
     <body>
@@ -33,41 +29,22 @@
             <div class="container_main">
                 <div class="evaluation">
                     <h2>EVALUATION</h2>
-                        <div class="languageSelect">
-                            <span>Select Language</span>
-                            <input
-                                type="radio"
-                                id="c/c++"
-                                class="language"
-                                name="language"
-                                checked
-                            />
-                            <label for="c/c++">c/c++</label>
-                            <input
-                                type="radio"
-                                id="python"
-                                class="language"
-                                name="language"
-                            />
-                            <label for="python">python</label>
-                            <input
-                                type="radio"
-                                id="java"
-                                class="language"
-                                name="language"
-                            />
-                            <label for="java">java</label>
-                        </div>
-                        <div>
-                            <!-- upload button -->
-                            <div class="upload">
-                                <form action="/uploadFile" enctype="multipart/form-data" method="post">
-                                  <input type="file" name="attachment">
-                                  <button type="submit" class="btn btn-primary">Upload</button>
-                            </div>
-                        </div>
-
-                    </form>
+                    <div class="languageSelect">
+                        <span>Select Language</span>
+                        <input type="radio" id="c/c++" class="language" name="language" checked />
+                        <label for="c/c++">c/c++</label>
+                        <input type="radio" id="python" class="language" name="language" />
+                        <label for="python">python</label>
+                        <input type="radio" id="java" class="language" name="language" />
+                        <label for="java">java</label>
+                    </div>
+                    <div>
+                        <!-- upload button -->
+                        <form action="/uploadFile" enctype="multipart/form-data" method="post">
+                            <input class="upload" type="file" name="attachment" accept=".c, .cpp, .py, .java" />
+                            <button type="submit" class="btn btn-primary">Evaluate</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,9 +53,3 @@
         <div id="footer"></div>
     </body>
 </html>
-
-
-
-
-
-

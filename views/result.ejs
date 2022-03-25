@@ -6,10 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Zogori</title>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/css/style.css" />
     </head>
     <body>
@@ -33,20 +30,32 @@
             <div class="container_main">
                 <div class="evaluation">
                     <h2>RESULT</h2>
-                        
-                    </form>
                 </div>
+                <!-- upload button -->
+                <form action="/uploadFile" enctype="multipart/form-data" method="post">
+                    <label class="upload" for="file_uploads">choose file</label>
+                    <input type="file" id="file_uploads" name="attachment" accept=".c, .cpp, .py, .java" />
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
                 <div class="score">
                     <div class="size scoreContainer">
                         <table>
-                            <tr><th>file size</th></tr>
-                            <tr><td><%- filesize %> Bytes</td></tr>
+                            <tr>
+                                <th>file size</th>
+                            </tr>
+                            <tr>
+                                <td><%- filesize %> Bytes</td>
+                            </tr>
                         </table>
                     </div>
                     <div class="complexity scoreContainer">
                         <table>
-                            <tr><th>complexity</th></tr>
-                            <tr><td><%- output %></td></tr>
+                            <tr>
+                                <th>complexity</th>
+                            </tr>
+                            <tr>
+                                <td><%- output %></td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -56,9 +65,3 @@
         <div id="footer"></div>
     </body>
 </html>
-
-
-
-
-
-
