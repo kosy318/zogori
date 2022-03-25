@@ -120,11 +120,11 @@ volume = length * math.log2(vocabulary)
 difficulty = (n_1 / 2) * (N_2 / n_2)
 effort = difficulty * volume
 
-print(f'''Program vocabulary: {vocabulary}
-Program length: {length}
-Calculated estimated program length: {estimated_length}
-Volume: {volume}
-Difficulty: {difficulty}
-Effort: {effort}''')
+print(f'''Program vocabulary: {vocabulary}<br>
+Program length: {length}<br>
+Calculated estimated program length: {estimated_length}<br>
+Volume: {volume}<br>
+Difficulty: {difficulty}<br>
+Effort: {effort}<br>''')
 print(f'LOC : {LOC}<br>')
 print(f'CCM : {CCM}<br>')
