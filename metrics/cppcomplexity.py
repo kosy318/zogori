@@ -87,10 +87,10 @@ while True:
         result['DOT_OP'].append('.')
 
 
-for keys in result.keys():
-    print(f'{keys: <15}{len(result[keys]): <5}<br>')
-    for val in result[keys]:
-        print(f'{" " * 10}>>   {val}<br>')
+# for keys in result.keys():
+#     print(f'{keys: <15}{len(result[keys]): <5}<br>')
+#     for val in result[keys]:
+#         print(f'{" " * 10}>>   {val}<br>')
 
 LOC -= (len(result['INCLUDE']) + len(result['NAMESPACE']))
 CCM = len(result['CCM']) + 1
