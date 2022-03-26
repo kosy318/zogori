@@ -1,7 +1,7 @@
 # zogori
 
 ## NPM modules 
-*express
-*multer
-*body-parser
-*ejs
+*express\n
+*multer\n
+*body-parser\n 
+*ejs\n
