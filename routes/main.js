@@ -23,10 +23,9 @@ router.post("/uploadFile", upload.single("attachment"), function (req, res) {
     //exec file and callback result page
     // const fread = execFile("main.exe",[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
     let language = req.body.language;
-    console.log(req.body);
     if(language == "c/c++"){
         const fread = exec(
-            `python3 zogori_for_test/cppcomplexity.py uploadedFiles/${req.file.filename}`,
+            `python3 metrics/cppcomplexity.py uploadedFiles/${req.file.filename}`,
             function (error, stdout, stderr) {
                 fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                 console.log("Error  : ", error);
@@ -38,7 +37,7 @@ router.post("/uploadFile", upload.single("attachment"), function (req, res) {
     }
     else if(language == "python"){
         const fread = exec(
-            `python3 zogori_for_test/pycomplexity.py uploadedFiles/${req.file.filename}`,
+            `python3 metrics/pycomplexity.py uploadedFiles/${req.file.filename}`,
             function (error, stdout, stderr) {
                 fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                 console.log("Error  : ", error);

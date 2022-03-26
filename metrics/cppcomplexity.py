@@ -9,7 +9,7 @@ import sys
 # on powerShell : pyinstaller -F main.py tokrules.py
 
 # Build the lexer
-lexer = lex.lex(module=tokrules)  # , debug=1)
+lexer = lex.lex(module=cpptokrules)  # , debug=1)
 lexer.nested = []
 
 data = ''

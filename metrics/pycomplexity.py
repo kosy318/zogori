@@ -51,7 +51,7 @@ operator = 0
 # Tokenize
 while True:
     tok = lexer.token()
-    print(tok)
+    # print(tok)
     if not tok:
         break  # No more input
     if tok.type in conditional:
