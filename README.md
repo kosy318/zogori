@@ -1,8 +1,8 @@
 # zogori
 
 ## NPM modules 
-*express
-*multer
-*body-parser
-*ejs
+* express
+* multer
+* body-parser
+* ejs
 
