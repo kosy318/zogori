@@ -81,7 +81,6 @@ while True:
         result['ID'].append(var.split()[-1])
 
     if tok.type in decision_func:
-        print(tok.type, tok.value)
         result['CCM'].append(tok.value)
 
     if tok.type == 'FUNCTION' and tok.value[0] == '.':
