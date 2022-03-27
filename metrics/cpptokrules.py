@@ -27,8 +27,8 @@ tokens = [
     'FUNCTION',
     'VARIABLE',
     'ID',
-    'IF',
     'ELSE_IF',
+    'IF',
     'ELSE',
     'WHILE',
     'SWITCH',
@@ -69,17 +69,15 @@ def t_namespace(t):
     return t
 
 
-def t_if(t):
-    r'if'
-    t.type = reserved.get(t.value, 'IF')
-    return t
-
-
 def t_else_if(t):
-    r'else if'
+    r'else\sif[^a-zA-Z]'
     t.type = reserved.get(t.value, 'ELSE_IF')
     return t
 
+def t_if(t):
+    r'if[^a-zA-Z]'
+    t.type = reserved.get(t.value, 'IF')
+    return t
 
 def t_else(t):
     r'else'
@@ -88,19 +86,19 @@ def t_else(t):
 
 
 def t_while(t):
-    r'while'
+    r'while[^a-zA-Z]'
     t.type = reserved.get(t.value, 'WHILE')
     return t
 
 
 def t_switch(t):
-    r'switch'
+    r'switch[^a-zA-Z]'
     t.type = reserved.get(t.value, 'SWITCH')
     return t
 
 
 def t_for(t):
-    r'for'
+    r'for[^a-zA-Z]'
     t.type = reserved.get(t.value, 'FOR')
     return t
 
