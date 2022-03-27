@@ -15,28 +15,7 @@ lexer.nested = []
 data = ''
 LOC = 0
 # Test it out
-with open("iron.cpp", 'r') as file:
-    comment_start = False
-    comment_end = False
-    for line in file.readlines():
-        enter = re.fullmatch("[ \t\n]+", line)
-        one_line_comment = re.match("^[ \t]*//.*", line)
-        if not comment_start:
-            comment_start = re.match("^[ \t]*/(\*).*", line)
-        comment_end = re.match("^[ \t]*(\*)/.*", line)
-        if not comment_end and comment_start:
-            continue
-        elif comment_end and comment_start:
-            comment_end = False
-            comment_start = False
-            continue
-
-        if not enter and not one_line_comment:
-            data += line
-            LOC += 1
-
-# read_file = sys.argv[1]
-# with open(read_file, 'r') as file:
+# with open("iron.cpp", 'r') as file:
 #     comment_start = False
 #     comment_end = False
 #     for line in file.readlines():
@@ -55,6 +34,27 @@ with open("iron.cpp", 'r') as file:
 #         if not enter and not one_line_comment:
 #             data += line
 #             LOC += 1
+
+read_file = sys.argv[1]
+with open(read_file, 'r') as file:
+    comment_start = False
+    comment_end = False
+    for line in file.readlines():
+        enter = re.fullmatch("[ \t\n]+", line)
+        one_line_comment = re.match("^[ \t]*//.*", line)
+        if not comment_start:
+            comment_start = re.match("^[ \t]*/(\*).*", line)
+        comment_end = re.match("^[ \t]*(\*)/.*", line)
+        if not comment_end and comment_start:
+            continue
+        elif comment_end and comment_start:
+            comment_end = False
+            comment_start = False
+            continue
+
+        if not enter and not one_line_comment:
+            data += line
+            LOC += 1
 
 
 # Give the lexer some input
