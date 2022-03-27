@@ -38,7 +38,7 @@ with open(read_file, 'r') as file:
 lexer.input(data)
 
 
-conditional = ['IF', 'ELIF', 'WHITE']
+conditional = ['IF', 'ELIF', 'WHILE']
 brackets = ['BRACKET','BRACE','LPAREN','RPAREN']
 variables =['STRING', 'ID', 'NUMBER']
 operatorType = []
