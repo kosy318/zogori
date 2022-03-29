@@ -1,6 +1,6 @@
 import math
 import ply.lex as lex
-import cpptokrules
+import cpp_tokrules
 import re
 import sys
 
@@ -9,7 +9,7 @@ import sys
 # on powerShell : pyinstaller -F main.py tokrules.py
 
 # Build the lexer
-lexer = lex.lex(module=cpptokrules)  # , debug=1)
+lexer = lex.lex(module=cpp_tokrules)  # , debug=1)
 lexer.nested = []
 
 data = ''

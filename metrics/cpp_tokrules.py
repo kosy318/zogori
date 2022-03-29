@@ -6,19 +6,7 @@
 # Declare the state
 from ply.lex import TOKEN
 
-# states = (
-#     ('ccode', 'exclusive'),
-# )
-
-reserved = {
-    'then': 'THEN',
-
-    # 'void': 'VOID',
-    # 'int': 'INT',
-    # 'vector': 'VECTOR',
-    # 'char': 'CHAR',
-    # 'string': 'STRING',
-}
+reserved = {}
 
 # list of token names. this is always required
 tokens = [
@@ -135,24 +123,9 @@ def t_NUMBER(t):
     return t
 
 
-# define a rule so we can track line numbers
-# 잘 안돼서 제외...
-# def t_newline(t):
-#     r'\n+'
-#     t.lexer.lineno += len(t.value)
-
-
-# def t_COMMENT(t):
-#     r'\#.*'
-#     print('commnet line: "%s"' %t.value)
-#     pass
-#     # No return value. Token discarded
-
-
 # a string containing ignored characters(spaces and tabs)
 # write in string
 t_ignore = ' \t\n'
-# t_ccode_ignore = ' \t\n'
 
 
 # Error handling rule
@@ -167,38 +140,7 @@ def t_BRACE(t):
     return t
 
 
-
-# Match the first {. Enter ccode state.
-# def t_ccode(t):
-#     r'\{'
-#     t.lexer.code_start = t.lexer.lexpos - 1  # Record the starting position
-#     t.lexer.level = 1  # Initial brace level
-#     t.lexer.begin('ccode')  # Enter 'ccode' state
-
-
-# Rules for the ccode state
-# def t_ccode_lbrace(t):
-#     r'\{'
-#     t.lexer.level += 1
-#
-#
-# def t_ccode_rbrace(t):
-#     r'\}'
-#     t.lexer.nested.append(t.lexer.level)
-#     t.lexer.level -= 1
-#
-#     # If closing brace, return the code fragment
-#     if t.lexer.level == 0:
-#         t.value = t.lexer.lexdata[t.lexer.code_start+1:t.lexer.lexpos-1]
-#         t.type = "CCODE"
-#         t.lexer.begin('INITIAL')
-#         return t
-
-
 # C or C++ comment (ignore)
-# t_ccode_comment로 하니까 안됨... 왜?
-# t_comment로 하니까 line count가 제대로 안됨.. 왜???
-# 전체 데이터에서 \n을 count 하고 comment의 \n을 count해서 빼주기로 결정
 def t_comment(t):
     r'(/\*(.|\n)*?\*/)|(//.*)'
     pass
@@ -216,13 +158,3 @@ def t_ccode_char(t):
     r'\'([^\\\n]|(\\.))*?\''
     t.type = reserved.get(t.value, 'CHAR_VALUE')
     return t
-#
-#
-# # Any sequence of non-whitespace characters (not braces, strings)
-# def t_ccode_nonspace(t):
-#     r'[^\s\{\}\'\"]+'
-
-
-# # For bad characters, we just skip over it
-# def t_ccode_error(t):
-#     t.lexer.skip(1)

@@ -33,9 +33,17 @@
                 </div>
                 <!-- upload button -->
                 <form action="/uploadFile" enctype="multipart/form-data" method="post">
-                    <label class="upload" for="file_uploads">choose file</label>
-                    <input type="file" id="file_uploads" name="attachment" accept=".c, .cpp, .py, .java" />
-                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <div class="languageSelect">
+                        <span>Select Language</span>
+                        <label><input type="radio" value="c/c++" name="language" checked />c/c++</label>
+                        <label><input type="radio" value="python" name="language" />python</label>
+                        <!-- <label><input type="radio" value="java" name="language" />java</label> -->
+                    </div>
+                    <div>
+                        <!-- upload button -->
+                        <input class="upload" type="file" name="attachment" accept=".c, .cpp, .py" />
+                        <button type="submit" class="btn btn-primary">Evaluate</button>
+                    </div>
                 </form>
                 <div class="score">
                     <div class="size scoreContainer">

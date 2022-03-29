@@ -1,5 +1,5 @@
 import ply.lex as lex
-import pytokrules
+import py_tokrules
 import re
 import sys
 import math
@@ -9,7 +9,7 @@ import math
 # on powerShell : pyinstaller -F main.py tokrules.py
 
 # Build the lexer
-lexer = lex.lex(module=pytokrules) #, debug=1)
+lexer = lex.lex(module=py_tokrules) #, debug=1)
 
 # Test it out
 data = ''
