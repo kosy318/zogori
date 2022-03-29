@@ -25,7 +25,7 @@ router.post("/uploadFile", upload.single("attachment"), function (req, res) {
     let language = req.body.language;
     if(language == "c/c++"){
         const fread = exec(
-            `python3 metrics/cppcomplexity.py uploadedFiles/${req.file.filename}`,
+            `python3 metrics/cpp_complexity.py uploadedFiles/${req.file.filename}`,
             function (error, stdout, stderr) {
                 fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                 console.log("Error  : ", error);
@@ -37,7 +37,7 @@ router.post("/uploadFile", upload.single("attachment"), function (req, res) {
     }
     else if(language == "python"){
         const fread = exec(
-            `python3 metrics/pycomplexity.py uploadedFiles/${req.file.filename}`,
+            `python3 metrics/py_complexity.py uploadedFiles/${req.file.filename}`,
             function (error, stdout, stderr) {
                 fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                 console.log("Error  : ", error);
