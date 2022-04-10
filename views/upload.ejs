@@ -8,6 +8,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/css/style.css" />
     </head>
+
+    <% alertFlag = 0; %>
+    <% if(alertFlag == "1"){ %>
+    <% alert("testing")}; %>
     <body>
         <!-- header -->
         <div id="header">
@@ -29,7 +33,7 @@
             <div class="container_main">
                 <div class="evaluation">
                     <h2>EVALUATION</h2>
-                    <form action="/uploadFile" enctype="multipart/form-data" method="post">
+                    <form action="/uploadFileWithOriginalFilename" enctype="multipart/form-data" method="post">
                         <div class="languageSelect">
                             <span>Select Language</span>
                             <label><input type="radio" value="c/c++"name="language" checked />c/c++</label>
