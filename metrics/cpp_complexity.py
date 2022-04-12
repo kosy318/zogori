@@ -62,7 +62,7 @@ lexer.input(data)
 
 decision_func = ['IF', 'ELSE_IF', 'WHILE', 'SWITCH', 'FOR']
 
-result = {'CCM': [], 'DOT_OP': [], 'ID': [],}
+result = {'CCM': [], 'DOT_OP': [], 'ID': [], 'FUNCTION': [],}
 # Tokenize
 while True:
     tok = lexer.token()
@@ -83,9 +83,9 @@ while True:
         # print(var.split()[:-1], var.split()[-1])
 
         if var.split()[-1] == 'struct':
-            result['VARIABLE'][-1] = ''.join(var.split()[-1])
+            result['VARIABLE'][-1] = var.split()[-1]
         elif var.split()[-1] == 'main':
-            result['FUNCTION'][-1] = ''.join(var.split()[-1])
+            result['FUNCTION'].append(var.split()[-1])
         else: result['ID'].append(var.split()[-1])
 
     if tok.type in decision_func:
@@ -130,7 +130,7 @@ volume = length * math.log2(vocabulary)
 difficulty = (n_1 / 2) * (N_2 / n_2)
 effort = difficulty * volume
 
-print(f'{result["BRACE"]}')
+# print(f'{result["BRACE"]}')
 print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
 <tr><td>Program length</td><td>{length}</td></tr>
 <tr><td>Estimated program length</td><td>{estimated_length}</td></tr>

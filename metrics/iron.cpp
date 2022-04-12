@@ -1,55 +1,77 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<int> is_palin() {
-	int num;
-	vector<int> answer;
-	string word;
+int visit[26] = {0,};
+int graph[26][26] = {0,};
+int max_ans = 0;
+string ans = "";
+string path = "";
+vector<int> vec = {};
 
-	ifstream in("palin.inp");
-	in >> num;
-	while (num--) {
-		int ans = 1;
-		in >> word;
-		auto iter1 = word.begin();
-		auto iter2 = word.end() - 1;
-
-		while (iter1 != word.end()) {
-			if (*iter1 != *iter2 && ans == 1) {
-				auto next1 = iter1 + 1;
-				auto next2 = iter2 - 1;
-				if (*next1 == *iter2) {
-					word.erase(iter1);
-					iter2--;
-				}else if (*iter1 == *next2) {
-					word.erase(iter2);
-					iter2--;
-				}else {
-					ans = 3;
-					break;
-				}
-				ans = 2;
-			}else if (*iter1 != *iter2 && ans > 1) ans = 3;
-
-			if (iter2 == word.begin()) break;
-
-			iter1++; iter2--;
-		}
-		answer.push_back(ans);
-	}
-	in.close();
-
-	return answer;
+void dfs(int cur, int cost) {
+    if(graph[cur][0] > 0 && cost + graph[cur][0] > max_ans) {
+        max_ans = cost + graph[cur][0];
+        path.push_back('a' + cur);
+        ans = path;
+        path.pop_back();
+    }
+    else if(graph[cur][0] > 0 && cost + graph[cur][0] == max_ans) {
+        path.push_back('a' + cur);
+        string temp = path;
+        if(ans.length() < temp.length()) {
+            ans = temp;
+        }
+        else if(ans.length() == temp.length() && ans.compare(temp) > 0) {
+            ans = temp;
+        }
+        path.pop_back();
+    }
+    path.push_back('a' + cur);
+    for(int i=0; i<26; i++) {
+        if(graph[cur][i] > 0 && visit[i] == 0) {
+            visit[i] = 1;
+            dfs(i,cost+graph[cur][i]);
+            visit[i] = 0;
+        }
+    }
+    path.pop_back();
 }
-
 int main() {
-	vector<int> answer = is_palin();
+    int N,M;
+    ifstream in("iron.inp");    // iorn.inp
+    ofstream out("iron.out");
+    in >> N >> M;
 
-	ofstream out("palin.out");
-	for (auto a : answer) out << a << endl;
-	out.close();
+    for(int i=0; i<M; i++) {
+        char u,v;
+        int w;
+        in >> u >> v >> w;
+        u -= 'a';
+        v -= 'a';
+        graph[u][v] = w;
+        graph[v][u] = w;
+    }
+
+    /*
+        testing comment
+    */
+
+
+
+
+    visit[0] = 1;
+    dfs(0, 0);
+
+    out << max_ans << "\n";
+    for(auto v : ans) {
+        out << v << " ";
+    }
+
+    in.close();
+    out.close();
+
+    return 0;
 }
+
+// 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+// a b c d e f g h i j  k  l  m  n
