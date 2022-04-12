@@ -30,7 +30,7 @@ LOC = 0
 #             comment_end = False
 #             comment_start = False
 #             continue
-#
+
 #         if not enter and not one_line_comment:
 #             data += line
 #             LOC += 1
@@ -76,9 +76,15 @@ while True:
         result[tok.type].append(tok.value)
 
     if tok.type == 'VARIABLE':
+        print(tok.value,': ')
         var = result['VARIABLE'][-1]
+
         result['VARIABLE'][-1] = ''.join(var.split()[:-1])
-        result['ID'].append(var.split()[-1])
+        print(var.split()[:-1], var.split()[-1])
+
+        if var.split()[-1] == 'struct':
+            result['VARIABLE'][-1] = ''.join(var.split()[-1])
+        else: result['ID'].append(var.split()[-1])
 
     if tok.type in decision_func:
         result['CCM'].append(tok.value)
@@ -112,7 +118,6 @@ for ele in inside_n2:
         n_2 += len(set(result[ele]))
         N_2 += len(result[ele])
 
-# print(f'nested {lexer.nested}')
 
 # print(f'n_1 = {n_1}, n_2 = {n_2}, N_1 = {N_1}, N_2 = {N_2}<br>')
 
@@ -123,11 +128,15 @@ volume = length * math.log2(vocabulary)
 difficulty = (n_1 / 2) * (N_2 / n_2)
 effort = difficulty * volume
 
-print(f'''{'Program vocabulary':<25}: {vocabulary}<br>
-{'Program length':<25}: {length}<br>
-{'Estimated program length':<25}: {estimated_length}<br>
-{'Volume':<25}: {volume}<br>
-{'Difficulty':<25}: {difficulty}<br>
-{'Effort':<25}: {effort}<br><br>''')
-print(f'CCM : {CCM}<br>')
-print(f'LOC : {LOC}<br>')
+print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
+<tr><td>Program length</td><td>{length}</td></tr>
+<tr><td>Estimated program length</td><td>{estimated_length}</td></tr>
+<tr><td>Volume</td><td>{volume}</td></tr>
+<tr><td>Difficulty</td><td>{difficulty}</td></tr>
+<tr><td>Effort</td><td>{effort}</td></tr>
+<tr><td>Functions</td><td>{set(result['FUNCTION'])}</td></tr>
+<tr><td>nb of Functions</td><td>{len(set(result['FUNCTION']))}</td></tr>
+<tr><td>Variables</td><td>{result['ID']}</td></tr>
+<tr><td>nb of Variables</td><td>{len(set(result['ID']))}</td></tr>
+<tr><td>CCM</td><td>{CCM}</td></tr>
+<tr><td>LOC</td><td>{LOC}</td></tr>''')

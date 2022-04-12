@@ -6,7 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Zogori</title>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="/css/style.css" />
     </head>
     <body>
@@ -32,38 +35,53 @@
                     <h2>RESULT</h2>
                 </div>
                 <!-- upload button -->
-                <form action="/uploadFileWithOriginalFilename" enctype="multipart/form-data" method="post">
+                <form
+                    action="/uploadFileWithOriginalFilename"
+                    enctype="multipart/form-data"
+                    method="post"
+                >
                     <div class="languageSelect">
                         <span>Select Language</span>
-                        <label><input type="radio" value="c/c++" name="language" checked />c/c++</label>
-                        <label><input type="radio" value="python" name="language" />python</label>
-                        <!-- <label><input type="radio" value="java" name="language" />java</label> -->
+                        <label
+                            ><input
+                                type="radio"
+                                value="c/c++"
+                                name="language"
+                                checked
+                            />c/c++</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                value="python"
+                                name="language"
+                            />python</label
+                        >
                     </div>
                     <div>
                         <!-- upload button -->
-                        <input class="upload" type="file" name="attachment" accept=".c, .cpp, .py" />
-                        <button type="submit" class="btn btn-primary">Evaluate</button>
+                        <input
+                            class="upload"
+                            type="file"
+                            name="attachment"
+                            accept=".c, .cpp, .py"
+                        />
+                        <button type="submit" class="btn btn-primary">
+                            Evaluate
+                        </button>
                     </div>
                 </form>
                 <div class="score">
                     <div class="size scoreContainer">
                         <table>
-                            <tr>
+                            <tr class="fileSize">
                                 <th>file size</th>
-                            </tr>
-                            <tr>
                                 <td><%- filesize %> Bytes</td>
                             </tr>
-                        </table>
-                    </div>
-                    <div class="complexity scoreContainer">
-                        <table>
                             <tr>
-                                <th>complexity</th>
+                                <th colspan="2">complexity</th>
                             </tr>
-                            <tr>
-                                <td><%- output %></td>
-                            </tr>
+                            <%- output %>
                         </table>
                     </div>
                 </div>

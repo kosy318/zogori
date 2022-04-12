@@ -5,8 +5,11 @@
 
 # Declare the state
 from ply.lex import TOKEN
+import re
 
-reserved = {}
+reserved = {
+    'return': 'RETURN',
+}
 
 # list of token names. this is always required
 tokens = [
@@ -97,11 +100,12 @@ function = r'([.]?' + id + '\()|(\.'+id+')|(cin)|(cout)'#'(.|\n)*?\)'
 
 @TOKEN(function)
 def t_FUNCTION(t):
+    t.value = re.sub(r"[^a-zA-Z0-9]","",t.value)
     t.type = reserved.get(t.value, 'FUNCTION')
     return t
 
 
-variable = r'([a-zA-Z]+<.*>[\s]*'+id+')|([a-zA-Z]+'+'\s'+id+')'
+variable = r'([a-zA-Z]+<.*>[\s]*'+id+')|([a-zA-Z]+[\s]<.*>[\s]*'+id+')|([a-zA-Z]+'+'\s'+id+')'
 @TOKEN(variable)
 def t_VARIABLE(t):
     # print(t.value)

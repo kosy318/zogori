@@ -19,7 +19,7 @@
 
     /* Font size */
     --font-large: 48px;
-    --font-medium: 28px;
+    --font-medium: 23px;
     --font-regular: 18px;
     --font-small: 16px;
     --font-micro: 14px;
@@ -152,30 +152,33 @@ body {
 
 .scoreContainer {
     margin: 16px;
-    width: 100%;
+    /* width: 70%; */
     min-height: 300px;
     padding: 16px;
-    background-color: var(--color-light-white);
+    /* background-color: var(--color-light-white); */
     border-radius: 10px;
     overflow: hidden;
 }
 
 .score table {
-    width: 100%;
+    width: auto;
+    margin: auto;
 }
 
 .score th {
     font-size: var(--font-medium);
     font-weight: bolder;
     color: var(--color-dark-grey);
-    text-align: center;
+    text-align: left;
     padding: 5px;
-    border-bottom: 2px solid var(--color-dark-grey);
+    /* border-bottom: 2px solid var(--color-dark-grey); */
 }
 
 .score td {
-    padding: 16px;
+    font-size: var(--font-small);
+    padding-right: 32px;
     text-align: left;
+    width: fit-content;
 }
 
 /* For below 768px screen width */
@@ -202,6 +205,11 @@ body {
         justify-content: space-between;
         display: flex;
         margin: 0px 40px;
+    }
+
+    .score td {
+        font-size: var(--font-small);
+        padding-right: 10px;
     }
 }
 
