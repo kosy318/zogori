@@ -2,6 +2,7 @@ import math
 import ply.lex as lex
 import cpp_tokrules
 import re
+import sys
 
 # make python exe file
 # on powerShell : pip install pyinstaller
