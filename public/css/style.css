@@ -57,6 +57,10 @@ body {
     color: var(--color-white);
 }
 
+h1 a:visited {
+    color: var(--color-white);
+}
+
 #container {
     display: flex;
 }
@@ -79,6 +83,10 @@ body {
 
 .menu_item:hover {
     text-decoration: underline;
+}
+
+.menu_item a:visited {
+    color: var(--color-black);
 }
 
 /* main */
