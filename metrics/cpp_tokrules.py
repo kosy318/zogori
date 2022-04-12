@@ -131,7 +131,7 @@ def t_ID(t):
 
 # this rule matches numbers and convers the string into a python integer.
 def t_NUMBER(t):
-    r'\d+'
+    r'[+-]?([0-9]*[.])?[0-9]+'
     t.value = int(t.value)
     return t
 

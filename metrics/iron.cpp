@@ -9,7 +9,7 @@ string path = "";
 vector<int> vec = {};
 
 void dfs(int cur, int cost) {
-    if(graph[cur][0] > 0 && cost + graph[cur][0] > max_ans) {
+    if(graph[cur][0] > 0 &&s cost + graph[cur][0] > max_ans) {
         max_ans = cost + graph[cur][0];
         path.push_back('a' + cur);
         ans = path;
