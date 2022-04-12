@@ -76,11 +76,11 @@ while True:
         result[tok.type].append(tok.value)
 
     if tok.type == 'VARIABLE':
-        print(tok.value,': ')
+        # print(tok.value,': ')
         var = result['VARIABLE'][-1]
 
         result['VARIABLE'][-1] = ''.join(var.split()[:-1])
-        print(var.split()[:-1], var.split()[-1])
+        # print(var.split()[:-1], var.split()[-1])
 
         if var.split()[-1] == 'struct':
             result['VARIABLE'][-1] = ''.join(var.split()[-1])

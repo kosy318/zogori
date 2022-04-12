@@ -152,7 +152,7 @@ def t_comment(t):
 
 # C string
 def t_string_value(t):
-    r'\"([^\\\n]|(\\.))*?\"'
+    r'(\"([^\\\n]|(\\.))*?\")|(endl)'
     t.type = reserved.get(t.value, 'STRING_VALUE')
     return t
 
