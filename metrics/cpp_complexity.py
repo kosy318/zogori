@@ -135,8 +135,8 @@ print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
 <tr><td>Difficulty</td><td>{difficulty}</td></tr>
 <tr><td>Effort</td><td>{effort}</td></tr>
 <tr><td>Functions</td><td>{set(result['FUNCTION'])}</td></tr>
-<tr><td>nb of Functions</td><td>{len(set(result['FUNCTION']))}</td></tr>
-<tr><td>Variables</td><td>{result['ID']}</td></tr>
-<tr><td>nb of Variables</td><td>{len(set(result['ID']))}</td></tr>
+<tr><td>nb of Functions</td><td>{len(result['FUNCTION'])}</td></tr>
+<tr><td>Variables</td><td>{set(result['ID'])}</td></tr>
+<tr><td>nb of Variables</td><td>{len(result['ID'])}</td></tr>
 <tr><td>CCM</td><td>{CCM}</td></tr>
 <tr><td>LOC</td><td>{LOC}</td></tr>''')

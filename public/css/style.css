@@ -177,8 +177,10 @@ body {
 .score td {
     font-size: var(--font-small);
     padding-right: 32px;
+    padding-bottom: 3px;
     text-align: left;
     width: fit-content;
+    border-bottom: 1px dashed var(--color-grey);
 }
 
 /* For below 768px screen width */
