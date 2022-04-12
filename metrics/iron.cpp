@@ -1,77 +1,53 @@
-#include <bits/stdc++.h>
+#include <fstream>
+#include <cmath>
+
 using namespace std;
 
-int visit[26] = {0,};
-int graph[26][26] = {0,};
-int max_ans = 0;
-string ans = "";
-string path = "";
-vector<int> vec = {};
+double shortest_l(double* a, double* b, double* p) {
+	double a_dis, b_dis;
+	a_dis = (a[0] - p[0]) * (a[0] - p[0]) + (a[1] - p[1]) * (a[1] - p[1]) + (a[2] - p[2]) * (a[2] - p[2]);
+	b_dis = (b[0] - p[0]) * (b[0] - p[0]) + (b[1] - p[1]) * (b[1] - p[1]) + (b[2] - p[2]) * (b[2] - p[2]);
+    if(abs(a[0] - b[0]) < 0.00005 && abs(a[1] - b[1]) < 0.00005 && abs(a[2] - b[2]) < 0.00005)
+        return a_dis;
 
-void dfs(int cur, int cost) {
-    if(graph[cur][0] > 0 &&s cost + graph[cur][0] > max_ans) {
-        max_ans = cost + graph[cur][0];
-        path.push_back('a' + cur);
-        ans = path;
-        path.pop_back();
-    }
-    else if(graph[cur][0] > 0 && cost + graph[cur][0] == max_ans) {
-        path.push_back('a' + cur);
-        string temp = path;
-        if(ans.length() < temp.length()) {
-            ans = temp;
-        }
-        else if(ans.length() == temp.length() && ans.compare(temp) > 0) {
-            ans = temp;
-        }
-        path.pop_back();
-    }
-    path.push_back('a' + cur);
-    for(int i=0; i<26; i++) {
-        if(graph[cur][i] > 0 && visit[i] == 0) {
-            visit[i] = 1;
-            dfs(i,cost+graph[cur][i]);
-            visit[i] = 0;
-        }
-    }
-    path.pop_back();
+    double mid[3];
+	for (int i = 0; i < 3; i++) mid[i] = (a[i] + b[i]) / 2;
+
+    if(a_dis < b_dis) return shortest_l(a, mid, p);
+    else return shortest_l(mid, b, p);
 }
+
+double divide(double* a, double* b, double* c, double* d){
+    double c_dis = shortest_l(a, b, c);
+    double d_dis = shortest_l(a, b, d);
+    if(abs(c[0] - d[0]) < 0.00005 && abs(c[1] - d[1]) < 0.00005 && abs(c[2] - d[2]) < 0.00005)
+        return c_dis;
+
+    double cd_mid[3];
+    for(int i=0; i<3; i++) cd_mid[i] = (c[i]+d[i])/2;
+
+    if (c_dis < d_dis) return divide(a, b, c, cd_mid);
+    else return divide(a, b, cd_mid, d);
+}
+
 int main() {
-    int N,M;
-    ifstream in("iron.inp");    // iorn.inp
-    ofstream out("iron.out");
-    in >> N >> M;
+    ifstream in("station.inp");
+    ofstream out("station.out");
+    double len;
 
-    for(int i=0; i<M; i++) {
-        char u,v;
-        int w;
-        in >> u >> v >> w;
-        u -= 'a';
-        v -= 'a';
-        graph[u][v] = w;
-        graph[v][u] = w;
-    }
+	double a[3], b[3], c[3], d[3];
+	in >> a[0] >> a[1] >> a[2];
+	in >> b[0] >> b[1] >> b[2];
+	in >> c[0] >> c[1] >> c[2];
+	in >> d[0] >> d[1] >> d[2];
+	in.close();
 
-    /*
-        testing comment
-    */
-
-
-
-
-    visit[0] = 1;
-    dfs(0, 0);
-
-    out << max_ans << "\n";
-    for(auto v : ans) {
-        out << v << " ";
-    }
-
-    in.close();
-    out.close();
-
-    return 0;
+	len = divide(a, b, c, d);
+	if (abs(sqrt(len)- round(sqrt(len))) < 0.005) {
+        out<<(int)sqrt(len)<<endl;
+        out.close();
+        return 0;
+	}
+    out<<(int)ceil(sqrt(len))<<endl;
+	out.close();
 }
-
-// 1 2 3 4 5 6 7 8 9 10 11 12 13 14
-// a b c d e f g h i j  k  l  m  n
