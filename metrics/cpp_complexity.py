@@ -2,7 +2,6 @@ import math
 import ply.lex as lex
 import cpp_tokrules
 import re
-import sys
 
 # make python exe file
 # on powerShell : pip install pyinstaller
@@ -30,7 +29,7 @@ LOC = 0
 #             comment_end = False
 #             comment_start = False
 #             continue
-
+#
 #         if not enter and not one_line_comment:
 #             data += line
 #             LOC += 1
@@ -84,6 +83,8 @@ while True:
 
         if var.split()[-1] == 'struct':
             result['VARIABLE'][-1] = ''.join(var.split()[-1])
+        elif var.split()[-1] == 'main':
+            result['FUNCTION'][-1] = ''.join(var.split()[-1])
         else: result['ID'].append(var.split()[-1])
 
     if tok.type in decision_func:
@@ -128,6 +129,7 @@ volume = length * math.log2(vocabulary)
 difficulty = (n_1 / 2) * (N_2 / n_2)
 effort = difficulty * volume
 
+print(f'{result["BRACE"]}')
 print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
 <tr><td>Program length</td><td>{length}</td></tr>
 <tr><td>Estimated program length</td><td>{estimated_length}</td></tr>

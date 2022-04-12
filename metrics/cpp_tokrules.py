@@ -9,6 +9,8 @@ import re
 
 reserved = {
     'return': 'RETURN',
+    'break': 'BREAK',
+    'continue': 'CONTINUE',
 }
 
 # list of token names. this is always required
@@ -33,6 +35,8 @@ tokens = [
     'LINDEX',
     'RINDEX',
     'SEMICOLON',
+    'ENDL',
+    'MAIN',
     'STRING_VALUE',
     'CHAR_VALUE',
 ] + list(reserved.values())
@@ -105,6 +109,11 @@ def t_FUNCTION(t):
     return t
 
 
+def t_ENDL(t):
+    r'endl'
+    t.type = reserved.get(t.value, 'STRING_VALUE')
+    return t
+
 variable = r'([a-zA-Z]+<.*>[\s]*'+id+')|([a-zA-Z]+[\s]<.*>[\s]*'+id+')|([a-zA-Z]+'+'\s'+id+')'
 @TOKEN(variable)
 def t_VARIABLE(t):
@@ -152,7 +161,7 @@ def t_comment(t):
 
 # C string
 def t_string_value(t):
-    r'(\"([^\\\n]|(\\.))*?\")|(endl)'
+    r'\"([^\\\n]|(\\.))*?\"'
     t.type = reserved.get(t.value, 'STRING_VALUE')
     return t
 
