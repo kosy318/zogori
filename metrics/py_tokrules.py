@@ -42,6 +42,7 @@ tokens = [
     'IF',
     'WHILE',
     'MODULE',
+    'FLOWCONTROL',
 ] + list(reserved.values())
 
 
@@ -70,6 +71,9 @@ def t_IF(t):
 def t_WHILE(t):
     r'while'
     t.type = reserved.get(t.value,'WHILE')
+    return t
+def t_FLOWCONTROL(t):
+    r'(pass)|(continue)|(return)|(break)'
     return t
 
 @TOKEN(function)

@@ -33,6 +33,7 @@ with open(read_file, 'r') as file:
 # Give the lexer some input
 lexer.input(data)
 
+print("LOC "  ,LOC)
 
 conditional = ['IF', 'ELIF', 'WHILE']
 forelse = ['FOR','ELSE']
@@ -175,6 +176,19 @@ volume = length * math.log2(vocabulary)
 difficulty = (n_1 / 2) * (N_2 / n_2)
 effort = difficulty * volume
 
+# print("Program vocabulary : ", vocabulary)
+# print("Program length : ", length)
+# print("Estimated program length : ", estimated_length)
+# print("Difficulty : ", difficulty)
+# print("Effort : ", effort)
+# print("Functions : ", len(functionValue), functionValue)
+# print("total nb of Functions : ", volume)
+# print("Volume : ", functionNumber)
+# print("Variables : ", len(variableValue),variableValue)
+# print("nb of Variables : ", variable)
+# print("Depth : ",maxdepth, treeString)
+# print("CCM : ", CCM)
+# print("LOC : ", LOC)
 
 
 
