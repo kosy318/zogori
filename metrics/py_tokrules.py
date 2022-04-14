@@ -10,11 +10,9 @@ states = (
 )
 # else 는 분기문 숫자로 고려 X
 reserved = {
-    'if': 'IF',
     'elif':'ELIF',
     'else':'ELSE',
     'then': 'THEN',
-    'while': 'WHILE',
     'for': 'FOR',
     'del':"DEL",
     'is':"IS",
@@ -40,7 +38,10 @@ tokens = [
     'BRACE',
     'BRACKET',
     'INDENTION',
-    'WHITESPACE'
+    'WHITESPACE',
+    'IF',
+    'WHILE',
+    'MODULE',
 ] + list(reserved.values())
 
 
@@ -52,7 +53,24 @@ t_OPERATOR = r'[+/&%^~\-|*=<->!,]+'
 t_COMMENT = r'\#.*?\n'
 t_STRING = r'\".*?\"|\'.*?\''
 id = r'[a-zA-Z_][a-zA-Z_0-9]*'
-function =r'' + id + '\((.|\n)*?\)'
+function =r'' + id + '\(' #(.|\n)*?\)'
+
+
+def t_MODULE(t):
+    r'import\s[^\n]+'
+    t.type = reserved.get(t.value,"MODULE")
+    return t
+
+# if() 표현 때문에 function보다 우선적으로 걸러내기 위해서 function 상단에 작성
+def t_IF(t):
+    r'if'
+    t.type = reserved.get(t.value,'IF')
+    return t
+
+def t_WHILE(t):
+    r'while'
+    t.type = reserved.get(t.value,'WHILE')
+    return t
 
 @TOKEN(function)
 def t_FUNCTION(t):
