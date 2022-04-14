@@ -21,6 +21,8 @@ reserved = {
     'not':"NOT",
     'in':"IN",
     'global':"GLOBAL",
+    'and':"AND",
+    'or':"OR",
 
 }
 
@@ -36,8 +38,11 @@ tokens = [
     'MULTISTRING',
     'OPERATOR',
     'BRACE',
-    'BRACKET'
+    'BRACKET',
+    'INDENTION',
+    'WHITESPACE'
 ] + list(reserved.values())
+
 
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
@@ -65,6 +70,22 @@ def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
     return t
+
+
+
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+def t_INDENTION(t):
+    r'(\s\s\s\s)+'
+    return t
+def t_WHITESPACE(t):
+    r'\s'
+    pass
+
+
+
 
 # Error handling rule
 def t_error(t):
@@ -104,10 +125,6 @@ def t_multistring2_end(t):
 def t_multistring2_str(t):
     r'.*?\n'
 
-def t_newline(t):
-    r'\n+'
-    t.lexer.lineno += len(t.value)
-
-t_ignore = ' \t:.'
+t_ignore = '\t:.'
 #t_ignore_COMMENT = r'\#.*'
 
