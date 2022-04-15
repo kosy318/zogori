@@ -3,6 +3,7 @@ import ply.lex as lex
 import cpp_tokrules
 import re
 import sys
+from collections import deque
 
 # make python exe file
 # on powerShell : pip install pyinstaller
@@ -94,6 +95,24 @@ while True:
     if tok.type == 'FUNCTION' and tok.value[0] == '.':
         result['DOT_OP'].append('.')
 
+print(result['BRACE'])
+dq = deque()
+depth = 0
+cnt = 0
+for b in result['BRACE']:
+    if b == '}':
+        if depth < cnt:
+            depth = cnt
+        dq.pop()
+        cnt -= 1
+    elif b == '{':
+        dq.append(b)
+        cnt += 1
+    else:
+        print('<script>window.alert("DEPTH FINDING ERROR")</script>')
+
+print(depth)
+
 
 # for keys in result.keys():
 #     print(f'{keys: <15}{len(result[keys]): <5}<br>')
@@ -141,5 +160,6 @@ print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
 <tr><td>total nb of Functions</td><td>{len(result['FUNCTION'])}</td></tr>
 <tr><td>Variables</td><td>{len(set(result['ID']))}: {set(result['ID'])}</td></tr>
 <tr><td>total nb of Variables</td><td>{len(result['ID'])}</td></tr>
+<tr><td>total Depth</td><td>{depth}</td></tr>
 <tr><td>CCM</td><td>{CCM}</td></tr>
 <tr><td>LOC</td><td>{LOC}</td></tr>''')
