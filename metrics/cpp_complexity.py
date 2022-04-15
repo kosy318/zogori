@@ -95,7 +95,6 @@ while True:
     if tok.type == 'FUNCTION' and tok.value[0] == '.':
         result['DOT_OP'].append('.')
 
-print(result['BRACE'])
 dq = deque()
 depth = 0
 cnt = 0
@@ -160,6 +159,6 @@ print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
 <tr><td>total nb of Functions</td><td>{len(result['FUNCTION'])}</td></tr>
 <tr><td>Variables</td><td>{len(set(result['ID']))}: {set(result['ID'])}</td></tr>
 <tr><td>total nb of Variables</td><td>{len(result['ID'])}</td></tr>
-<tr><td>total Depth</td><td>{depth}</td></tr>
+<tr><td>Depth</td><td>{depth}</td></tr>
 <tr><td>CCM</td><td>{CCM}</td></tr>
 <tr><td>LOC</td><td>{LOC}</td></tr>''')
