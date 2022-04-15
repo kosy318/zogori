@@ -7,11 +7,11 @@ from collections import deque
 
 # Build the lexer
 lexer = lex.lex(module=py_tokrules) #, debug=1)
-1
+
 data = ''
 LOC = 0
 read_file = sys.argv[1]
-with open(read_file, 'r') as file:
+with open(read_file, 'r', encoding="UTF-8") as file:
     comment_start = False
     comment_end = False
     for line in file.readlines():
@@ -32,8 +32,6 @@ with open(read_file, 'r') as file:
             LOC += 1
 # Give the lexer some input
 lexer.input(data)
-
-print("LOC "  ,LOC)
 
 conditional = ['IF', 'ELIF', 'WHILE']
 forelse = ['FOR','ELSE']
@@ -155,6 +153,7 @@ while True:
     prevLineno = tok.lineno
 
 
+
 # indentQueue pop하면서 트리 string 형식으로 표현
 treeString = ""
 for i in range(len(indentQueue)):
@@ -167,14 +166,17 @@ for i in range(depth):
 # print(functionValue)
 # print(treeString)
 
-n_1,n_2 = operator, operand
-N_1, N_2 = len(operatorType), len(operandType)
-vocabulary = n_1 + n_2
-length = N_1 + N_2
-estimated_length = n_1 * math.log2(n_1) + n_2 * math.log2(n_2)
-volume = length * math.log2(vocabulary)
-difficulty = (n_1 / 2) * (N_2 / n_2)
-effort = difficulty * volume
+V = len(variableValue)
+Vd = variable
+F = len(functionValue)
+Fd = functionNumber
+D = maxdepth
+# print((V + Vd + Vd/V + F + Fd + Fd/F)**math.log(D+1))
+# print(((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1))
+# print((V + Vd + Vd/V + F + Fd + Fd/F+LOC)**math.log(D+1))
+# print(((V + Vd + Vd/V + F + Fd + Fd/F+LOC)/100)**math.log(D+1))
+elegancy = ((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1)
+
 
 # print("Program vocabulary : ", vocabulary)
 # print("Program length : ", length)
@@ -191,6 +193,15 @@ effort = difficulty * volume
 # print("LOC : ", LOC)
 
 
+n_1,n_2 = operator, operand
+N_1, N_2 = len(operatorType), len(operandType)
+vocabulary = n_1 + n_2
+length = N_1 + N_2
+estimated_length = n_1 * math.log2(n_1) + n_2 * math.log2(n_2)
+volume = length * math.log2(vocabulary)
+difficulty = (n_1 / 2) * (N_2 / n_2)
+effort = difficulty * volume
+
 
 
 print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
@@ -205,6 +216,8 @@ print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
 <tr><td>total nb of Variables</td><td>{variable}</td></tr>
 <tr><td>Depth</td><td>{maxdepth}: {treeString}</td></tr>
 <tr><td>CCM</td><td>{CCM}</td></tr>
-<tr><td>LOC</td><td>{LOC}</td></tr>''')
+<tr><td>LOC</td><td>{LOC}</td></tr>
+<tr><td>Elegancy</td><td>{elegancy}</td></tr>''')
+
 
 

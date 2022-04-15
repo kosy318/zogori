@@ -58,7 +58,7 @@ function =r'' + id + '\(' #(.|\n)*?\)'
 
 
 def t_MODULE(t):
-    r'import\s[^\n]+'
+    r'(from\s[^\s]+)?\simport\s[^\n]+'
     t.type = reserved.get(t.value,"MODULE")
     return t
 
@@ -72,6 +72,7 @@ def t_WHILE(t):
     r'while'
     t.type = reserved.get(t.value,'WHILE')
     return t
+    
 def t_FLOWCONTROL(t):
     r'(pass)|(continue)|(return)|(break)'
     return t
