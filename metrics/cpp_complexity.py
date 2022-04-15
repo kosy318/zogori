@@ -110,8 +110,6 @@ for b in result['BRACE']:
     else:
         print('<script>window.alert("DEPTH FINDING ERROR")</script>')
 
-print(depth)
-
 
 # for keys in result.keys():
 #     print(f'{keys: <15}{len(result[keys]): <5}<br>')
