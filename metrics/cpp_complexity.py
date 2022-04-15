@@ -63,7 +63,7 @@ lexer.input(data)
 
 decision_func = ['IF', 'ELSE_IF', 'WHILE', 'SWITCH', 'FOR']
 
-result = {'CCM': [], 'DOT_OP': [], 'ID': [], 'FUNCTION': [],}
+result = {'CCM': [], 'DOT_OP': [], 'ID': [], 'TYPE': [], 'FUNCTION': [],}
 # Tokenize
 while True:
     tok = lexer.token()
@@ -80,14 +80,20 @@ while True:
         # print(tok.value,': ')
         var = result['VARIABLE'][-1]
 
-        result['VARIABLE'][-1] = ''.join(var.split()[:-1])
+        if var.split()[0] != 'return' and var.split()[0] != 'goto':
+            result['TYPE'].append(' '.join(var.split()[:-1]))
         # print(var.split()[:-1], var.split()[-1])
 
         if var.split()[-1] == 'struct':
-            result['VARIABLE'][-1] = var.split()[-1]
-        elif var.split()[-1] == 'main':
-            result['FUNCTION'].append(var.split()[-1])
-        else: result['ID'].append(var.split()[-1])
+            result['TYPE'][-1] = var.split()[-1]
+        elif var.split()[-1] != 'main':
+            result['ID'].append(var.split()[-1])
+
+
+    if tok.type == 'ID' and (tok.value in ['continue', 'break', 'return']):
+        result['ID'].pop()
+        pass
+
 
     if tok.type in decision_func:
         result['CCM'].append(tok.value)
@@ -121,7 +127,7 @@ CCM = len(result['CCM']) + 1
 
 n_1 = 0
 N_1 = 0
-inside_n1 = ['IF', 'ELSE_IF', 'ELSE', 'WHILE', 'SWITCH', 'FOR', 'BRACE', 'RPAREN', 'LINDEX', 'RINDEX', 'FUNCTION', 'OPERATION', 'VARIABLE', 'SEMICOLON', 'COMMA', 'DOT_OP']
+inside_n1 = ['IF', 'ELSE_IF', 'ELSE', 'WHILE', 'SWITCH', 'FOR', 'BRACE', 'RPAREN', 'LINDEX', 'RINDEX', 'FUNCTION', 'OPERATION', 'TYPE', 'SEMICOLON', 'COMMA', 'DOT_OP']
 for ele in inside_n1:
     if ele in result.keys():
         # print(list(set(result[ele])))
@@ -138,7 +144,7 @@ for ele in inside_n2:
 
 
 # print(f'n_1 = {n_1}, n_2 = {n_2}, N_1 = {N_1}, N_2 = {N_2}<br>')
-
+# print(result['TYPE'])
 vocabulary = n_1 + n_2
 length = N_1 + N_2
 estimated_length = n_1 * math.log2(n_1) + n_2 * math.log2(n_2)

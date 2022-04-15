@@ -8,9 +8,6 @@ from ply.lex import TOKEN
 import re
 
 reserved = {
-    'return': 'RETURN',
-    'break': 'BREAK',
-    'continue': 'CONTINUE',
 }
 
 # list of token names. this is always required
@@ -18,7 +15,9 @@ tokens = [
     'INCLUDE',
     'NAMESPACE',
     'FUNCTION',
+    'FUNCTION_DECLARATION',
     'VARIABLE',
+    'TYPE',
     'ID',
     'ELSE_IF',
     'IF',
@@ -99,11 +98,20 @@ def t_for(t):
 
 
 id = r'[a-zA-Z_][a-zA-Z_0-9]*'
-function = r'([.]?' + id + '\()|(\.'+id+')|(cin)|(cout)'#'(.|\n)*?\)'
+variable = r'([a-zA-Z]+<.*>[*]?[\s]*'+id+')|([a-zA-Z]+[\s]<.*>[*]?[\s]*'+id+')|([a-zA-Z]+[*]?'+'\s'+id+')'
+function = r'([.]?' + id + '\()|(\.'+id+')|(cin)|(cout)'
+function_declaration = r''+variable+'\('
 
+
+@TOKEN(function_declaration)
+def t_FUNCTION_DECLARATION(t):
+    # print("function_D", t.value)
+    t.type = reserved.get(t.value, 'FUNCTION_DECLARATION')
+    return t
 
 @TOKEN(function)
 def t_FUNCTION(t):
+    # print("function", t.value)
     t.value = re.sub(r"[^a-zA-Z0-9]","",t.value)
     t.type = reserved.get(t.value, 'FUNCTION')
     return t
@@ -114,17 +122,26 @@ def t_ENDL(t):
     t.type = reserved.get(t.value, 'STRING_VALUE')
     return t
 
-variable = r'([a-zA-Z]+<.*>[\s]*'+id+')|([a-zA-Z]+[\s]<.*>[\s]*'+id+')|([a-zA-Z]+'+'\s'+id+')'
 @TOKEN(variable)
 def t_VARIABLE(t):
-    # print(t.value)
+    t.value = re.sub(r"[*]","",t.value)
+    # print("variable", t.value)
     t.type = reserved.get(t.value, 'VARIABLE')
+    return t
+
+type = r'\('+id+'\)'
+@TOKEN(type)
+def t_TYPE(t):
+    t.value = re.sub(r"[\(\)]", "", t.value)
+    # print("type", t.value)
+    t.type = reserved.get(t.value, 'TYPE')
     return t
 
 
 # a regular expression rule with some action code
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
+    # print("id", t.value)
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
 

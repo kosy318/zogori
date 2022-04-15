@@ -12,6 +12,8 @@ double shortest_l(double* a, double* b, double* p) {
 
     double mid[3];
 	for (int i = 0; i < 3; i++) mid[i] = (a[i] + b[i]) / 2;
+	continue;
+	break;
 
     if(a_dis < b_dis) return shortest_l(a, mid, p);
     else return shortest_l(mid, b, p);
