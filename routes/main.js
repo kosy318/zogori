@@ -59,11 +59,11 @@ router.post(
             }
         } else if (language == "python") {
             if (req.file.filename.search(/\.py/) < 0) {
-                if (req.file.filename.search(/\.cpp/) < 0) {
+
                     fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                     res.render("alert", { error: "잘못된 파일 형식입니다" });
                 }
-            } else {
+            else {
                 const fread = exec(
                     `python3 metrics/py_complexity.py uploadedFiles/${req.file.filename}`,
                     function (error, stdout, stderr) {
