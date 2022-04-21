@@ -2,3 +2,4 @@ node_modules
 uploadedFiles
 metrics/SORTED_BY_PROBLEMS/*
 metrics/output.xlsx
+metrics/~$output.xlsx
