@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import openpyxl
-from cpp_complexity import cal_complexity
+import cpp_complexity as cppcom
 folderList = [chr(i) for i in range(65,77)]
 print(folderList)
 
@@ -18,7 +18,7 @@ for i in folderList:
     temp_dic = {'filename':[],'distinct_func':[], 'number_func':[],'distinct_var':[],'number_var':[],
                 'depth':[],'loc':[],'elegance':[]}
     for j in fileList[i]:
-        distinct_func, number_func, distinct_var, number_var, depth, loc, elegance = (cal_complexity(path+i+"/"+ j))
+        distinct_func, number_func, distinct_var, number_var, depth, loc, elegance = (cppcom.cal_complexity(path+i+"/"+ j))
         temp_dic['filename'].append(j)
         temp_dic['distinct_func'].append(len(distinct_func))
         temp_dic['number_func'].append(number_func)
