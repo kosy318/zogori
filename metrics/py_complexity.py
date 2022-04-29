@@ -221,5 +221,5 @@ def cal_complexity(file_name):
     <tr><td>LOC</td><td>{LOC}</td></tr>
     <tr><td>Elegancy</td><td>{elegancy}</td></tr>''')
 
-return 0
+    return 0
 
