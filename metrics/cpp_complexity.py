@@ -27,7 +27,7 @@ def cal_complexity(file_name):
             one_line_comment = re.match("^[ \t]*//.*", line)
             if not comment_start:
                 comment_start = re.match("^[ \t]*/(\*).*", line)
-            comment_end = re.match("^[ \t]*(\*)/.*", line)
+            comment_end = re.match("(.|\n)*?(\*)/.*", line)
             if not comment_end and comment_start:
                 continue
             elif comment_end and comment_start:
@@ -132,7 +132,6 @@ def cal_complexity(file_name):
     #         print(f'{" " * 10}>>   {val}<br>')
 
     LOC -= (len(result['INCLUDE']) + len(result['NAMESPACE']))
-    CCM = len(result['CCM']) + 1
 
     n_1 = 0
     N_1 = 0
@@ -160,6 +159,7 @@ def cal_complexity(file_name):
     volume = length * math.log2(vocabulary)
     difficulty = (n_1 / 2) * (N_2 / n_2)
     effort = difficulty * volume
+    
     complexity = {
         "distinct_func": set(result['FUNCTION']),
         "distinct_var": set(result['ID']),

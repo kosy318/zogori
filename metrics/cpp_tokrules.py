@@ -182,21 +182,14 @@ def t_BRACE(t):
     return t
 
 
-# C or C++ comment (ignore)
-def t_comment(t):
-    r'(/\*(.|\n)*?\*/)|(//.*)'
-    pass
+# # C or C++ comment (ignore)
+# def t_comment(t):
+#     r'(/\*(.|\n)*?\*/)|(//.*)'
+#     pass
 
 
 # C string
 def t_string_value(t):
     r'\"([^\\\n]|(\\.))*?\"'
     t.type = reserved.get(t.value, 'STRING_VALUE')
-    return t
-
-
-# C character literal
-def t_ccode_char(t):
-    r'\'([^\\\n]|(\\.))*?\''
-    t.type = reserved.get(t.value, 'CHAR_VALUE')
     return t
