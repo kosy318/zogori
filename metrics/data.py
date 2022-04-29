@@ -22,15 +22,17 @@ def make_excel():
         temp_dic = {'filename':[],'distinct_func':[], 'number_func':[],'distinct_var':[],'number_var':[],
                     'depth':[],'loc':[],'elegance':[]}
         for j in fileList[i]:
-            distinct_func, number_func, distinct_var, number_var, depth, loc, elegance = (cppcom.cal_complexity(path+i+"/"+ j))
+            print(path+i+"/"+ j)
+            result = (cppcom.cal_complexity(path+i+"/"+ j))
             temp_dic['filename'].append(j)
-            temp_dic['distinct_func'].append(len(distinct_func))
-            temp_dic['number_func'].append(number_func)
-            temp_dic['distinct_var'].append(len(distinct_var))
-            temp_dic['number_var'].append(number_var)
-            temp_dic['depth'].append(depth)
-            temp_dic['loc'].append(loc)
-            temp_dic['elegance'].append(elegance)
+            temp_dic['distinct_func'].append(len(result['distinct_func']))
+            temp_dic['number_func'].append(result['number_func'])
+            temp_dic['distinct_var'].append(len(result['distinct_var']))
+            temp_dic['number_var'].append(result['number_var'])
+            temp_dic['depth'].append(result['depth'])
+            temp_dic['loc'].append(result['LOC'])
+            temp_dic['elegance'].append(result['elegancy'])
+
         df = pd.DataFrame(temp_dic)
         df.to_excel(writer, sheet_name=i,index=False)
     writer.save()
@@ -49,6 +51,6 @@ def make_distribution(num, col):
         plotList[i] += 1
     plt.plot(plotList)
     plt.show()
-
+make_excel()
 make_df_list(df_list)
 make_distribution(7,'distinct_var')
