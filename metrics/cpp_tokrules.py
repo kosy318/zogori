@@ -187,6 +187,10 @@ def t_BRACE(t):
 #     r'(/\*(.|\n)*?\*/)|(//.*)'
 #     pass
 
+def t_char_value(t):
+    r'\'.*?\''
+    t.type = reserved.get(t.value, 'CHAR_VALUE')
+    return t
 
 # C string
 def t_string_value(t):
