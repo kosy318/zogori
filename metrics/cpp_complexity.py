@@ -159,7 +159,7 @@ def cal_complexity(file_name):
     volume = length * math.log2(vocabulary)
     difficulty = (n_1 / 2) * (N_2 / n_2)
     effort = difficulty * volume
-    
+
     complexity = {
         "distinct_func": set(result['FUNCTION']),
         "distinct_var": set(result['ID']),
