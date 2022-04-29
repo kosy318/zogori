@@ -43,7 +43,7 @@ router.post(
                 res.render("alert", { error: "잘못된 파일 형식입니다." });
             } else {
                 const fread = exec(
-                    `python3 metrics/cpp_complexity.py uploadedFiles/${req.file.filename}`,
+                    `python3 metrics/main.py uploadedFiles/${req.file.filename}`,
                     function (error, stdout, stderr) {
                         fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                         console.log("Error  : ", error);
@@ -65,7 +65,7 @@ router.post(
                 }
             else {
                 const fread = exec(
-                    `python3 metrics/py_complexity.py uploadedFiles/${req.file.filename}`,
+                    `python3 metrics/main.py uploadedFiles/${req.file.filename}`,
                     function (error, stdout, stderr) {
                         fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                         console.log("Error  : ", error);
