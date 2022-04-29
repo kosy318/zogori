@@ -1,0 +1,16 @@
+
+
+Contest on Fri Nov 03 10:00:00 KST 2006
+
+Site  : 1
+Run   : 520
+
+Team  : 6 
+Prob  : 3 Problem C
+Lang  : 3 null
+Elaps : 234
+At    : Fri Nov 03 13:54:13 KST 2006
+
+Main:  c2.cpp
+
+done at Mon Nov 06 14:00:34 KST 2006

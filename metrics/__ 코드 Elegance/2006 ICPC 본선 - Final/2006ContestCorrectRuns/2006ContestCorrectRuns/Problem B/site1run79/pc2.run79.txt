@@ -1,0 +1,16 @@
+
+
+Contest on Fri Nov 03 10:00:00 KST 2006
+
+Site  : 1
+Run   : 79
+
+Team  : 38 
+Prob  : 2 Problem B
+Lang  : 4 null
+Elaps : 39
+At    : Fri Nov 03 10:39:22 KST 2006
+
+Main:  dna.cpp
+
+done at Mon Nov 06 13:59:40 KST 2006

@@ -12,33 +12,34 @@ reserved = {
 
 # list of token names. this is always required
 tokens = [
-    'INCLUDE',
-    'NAMESPACE',
-    'FUNCTION',
-    'FUNCTION_DECLARATION',
-    'VARIABLE',
-    'TYPE',
-    'ID',
-    'ELSE_IF',
-    'IF',
-    'ELSE',
-    'WHILE',
-    'SWITCH',
-    'FOR',
-    'NUMBER',
-    'OPERATION',
-    'COMMA',
-    'BRACE',
-    'LPAREN',
-    'RPAREN',
-    'LINDEX',
-    'RINDEX',
-    'SEMICOLON',
-    'ENDL',
-    'MAIN',
-    'STRING_VALUE',
-    'CHAR_VALUE',
-] + list(reserved.values())
+             'INCLUDE',
+             'NAMESPACE',
+             'FUNCTION',
+             'FUNCTION_DECLARATION',
+             'VARIABLE',
+             'TYPE',
+             'ID',
+             'ELSE_IF',
+             'IF',
+             'ELSE',
+             'WHILE',
+             'SWITCH',
+             'FOR',
+             'NUMBER',
+             'OPERATION',
+             'COMMA',
+             'BRACE',
+             'LPAREN',
+             'RPAREN',
+             'LINDEX',
+             'RINDEX',
+             'SEMICOLON',
+             'ENDL',
+             'MAIN',
+             'STRING_VALUE',
+             'CHAR_VALUE',
+             'SHARP',
+         ] + list(reserved.values())
 
 t_OPERATION = r'[<>+\-*\/%|&!~^:=]+'
 t_COMMA = r','
@@ -47,6 +48,7 @@ t_RPAREN = r'\)'
 t_LINDEX = r'\['
 t_RINDEX = r'\]'
 t_SEMICOLON = r';'
+t_SHARP = r'\#.*'
 
 
 def t_include(t):
@@ -68,10 +70,12 @@ def t_else_if(t):
     t.type = reserved.get(t.value, 'ELSE_IF')
     return t
 
+
 def t_if(t):
-    r'if[^a-zA-Z]'
+    r'(if[^a-zA-Z])|(\?)'
     t.type = reserved.get(t.value, 'IF')
     return t
+
 
 def t_else(t):
     r'else'
@@ -98,9 +102,9 @@ def t_for(t):
 
 
 id = r'[a-zA-Z_][a-zA-Z_0-9]*'
-variable = r'([a-zA-Z]+<.*>[*]?[\s]*'+id+')|([a-zA-Z]+[\s]<.*>[*]?[\s]*'+id+')|([a-zA-Z]+[*]?'+'\s'+id+')'
-function = r'([.]?' + id + '\()|(\.'+id+')|(cin)|(cout)'
-function_declaration = r''+variable+'\('
+variable = r'([a-zA-Z]+<.*>[*]?[\s]*' + id + ')|([a-zA-Z]+[\s]<.*>[*]?[\s]*' + id + ')|([a-zA-Z]+[*]?' + '\s' + id + ')'
+function = r'([.]?' + id + '[\s]*\()|(\.' + id + ')|(cin)|(cout)'
+function_declaration = r'' + variable + '\('
 
 
 @TOKEN(function_declaration)
@@ -109,10 +113,11 @@ def t_FUNCTION_DECLARATION(t):
     t.type = reserved.get(t.value, 'FUNCTION_DECLARATION')
     return t
 
+
 @TOKEN(function)
 def t_FUNCTION(t):
     # print("function", t.value)
-    t.value = re.sub(r"[^a-zA-Z0-9]","",t.value)
+    t.value = re.sub(r"[^a-zA-Z0-9]", "", t.value)
     t.type = reserved.get(t.value, 'FUNCTION')
     return t
 
@@ -122,14 +127,18 @@ def t_ENDL(t):
     t.type = reserved.get(t.value, 'STRING_VALUE')
     return t
 
+
 @TOKEN(variable)
 def t_VARIABLE(t):
-    t.value = re.sub(r"[*]","",t.value)
+    t.value = re.sub(r"[*]", "", t.value)
     # print("variable", t.value)
     t.type = reserved.get(t.value, 'VARIABLE')
     return t
 
-type = r'\('+id+'\)'
+
+type = r'\(' + id + '\)'
+
+
 @TOKEN(type)
 def t_TYPE(t):
     t.value = re.sub(r"[\(\)]", "", t.value)
@@ -158,12 +167,12 @@ def t_NUMBER(t):
 
 # a string containing ignored characters(spaces and tabs)
 # write in string
-t_ignore = ' \t\n'
+t_ignore = '. \t\n'
 
 
 # Error handling rule
 def t_error(t):
-    print('illegal character "%s"<br>' % t.value[0])
+    print('<script>console.log(illegal character "%s")</script>' % t.value[0])
     t.lexer.skip(1)
 
 

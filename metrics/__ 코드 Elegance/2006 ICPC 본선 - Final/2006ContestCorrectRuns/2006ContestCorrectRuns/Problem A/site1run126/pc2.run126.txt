@@ -1,0 +1,17 @@
+
+
+Contest on Fri Nov 03 10:00:00 KST 2006
+
+Site  : 1
+Run   : 126
+
+Team  : 45 
+Prob  : 1 Problem A
+Lang  : 4 null
+Elaps : 58
+At    : Fri Nov 03 10:58:20 KST 2006
+
+Main:  Source1.cpp
+Sup file 0 : Source1.cpp
+
+done at Mon Nov 06 13:58:07 KST 2006
