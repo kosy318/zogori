@@ -8,10 +8,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/css/style.css" />
     </head>
-
-    <% alertFlag = 0; %>
-    <% if(alertFlag == "1"){ %>
-    <% alert("testing")}; %>
     <body>
         <!-- header -->
         <div id="header">
@@ -31,21 +27,11 @@
             </nav>
 
             <div class="container_main">
-                <div class="evaluation">
-                    <h2>EVALUATION</h2>
-                    <form action="/uploadFileWithOriginalFilename" enctype="multipart/form-data" method="post">
-                        <div class="languageSelect">
-                            <span>Select Language</span>
-                            <label><input type="radio" value="c/c++"name="language" checked />c/c++</label>
-                            <label><input type="radio" value="python"name="language" />python</label>
-                        </div>
-                        <div>
-                        <!-- upload button -->
-                            <input class="upload" type="file" name="attachment" accept=".c, .cpp, .py" />
-                            <button type="submit" class="btn btn-primary">Evaluate</button>
-                        </div>
-                        <p style="font-size: smaller; margin-top: 0%;"> * Don't put file contains Korean</p>
-                    </form>
+                <div class="about">
+                    <h2>ABOUT</h2>
+                    <div id="about_info">
+                        <p>과제 코드용 <b>코드 elegancy 분석 사이트</b>입니다. <br><b>Code elegance analysis site</b> for assignment code.</p>
+                    </div>
                 </div>
             </div>
         </div>

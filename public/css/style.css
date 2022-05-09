@@ -66,19 +66,29 @@ h1 a:visited {
 }
 
 /* menu */
+.container_menu {
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px dashed var(--color-light-grey);
+}
+
 .menu {
     list-style: none;
-    padding-left: 0;
-    padding: 20px 0;
-    margin: 0;
+    justify-content: space-around;
+    display: flex;
+    padding: 0;
+    margin: 12px 200px;
 }
 
 .menu_item {
     cursor: pointer;
-    padding: 8px 16px;
     margin: 0 4px;
     font-size: var(--font-regular);
-    font-weight: var(--weight-semi-bold);
+    font-weight: var(--weight-bold);
+}
+
+.menu_item a {
+    color: var(--color-black);
 }
 
 .menu_item:hover {
@@ -92,10 +102,12 @@ h1 a:visited {
 /* main */
 .container_main {
     display: block;
-    padding: 16px;
-    margin: auto;
+    position: absolute;
+    padding: 100px;
+    margin: 0px;
     text-align: center;
     width: 100%;
+    z-index: -1;
 }
 
 .evaluation {
@@ -191,6 +203,76 @@ h1 a:visited {
     border-bottom: 1px dashed var(--color-grey);
 }
 
+/* error report */
+#contact {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 16px;
+    text-align: left;
+    border-collapse: collapse;
+    width: 500px;
+}
+
+#contact thead {
+    background-color: var(--color-grey);
+    color: var(--color-light-white);
+}
+
+#contact td {
+    border-bottom: 1px solid var(--color-light-white);
+}
+
+#contact .name {
+    padding: 8px 16px 8px 16px;
+    font-weight: var(--weight-semi-bold);
+}
+#contact .in_charge {
+    padding: 8px 100px 8px 16px;
+}
+#contact .email {
+    padding: 8px 16px 8px 16px;
+}
+
+.format {
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+#format_info {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px var(--color-light-grey) dashed;
+    width: 500px;
+    padding: 16px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+#format_info:hover {
+    background-color: var(--color-light-grey);
+}
+
+.copy_info {
+    font-size: var(--font-small);
+}
+
+/* About */
+#about_info {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding-left: 32px;
+    text-align: left;
+}
+
+@media screen and (max-width: 1000px) {
+    #about_info {
+        width: 70%;
+        padding-left: 8px;
+        text-align: left;
+    }
+}
+
 /* For below 768px screen width */
 @media screen and (max-width: 768px) {
     :root {
@@ -200,6 +282,10 @@ h1 a:visited {
         --font-regular: 16px;
         --font-small: 14px;
         --font-micro: 12px;
+    }
+
+    .container_main {
+        padding: 16px;
     }
 
     #container {
@@ -212,14 +298,18 @@ h1 a:visited {
     }
 
     .menu {
-        justify-content: space-between;
-        display: flex;
         margin: 0px 40px;
     }
 
     .score td {
         font-size: var(--font-small);
         padding-right: 10px;
+    }
+
+    #about_info {
+        width: 90%;
+        padding-left: 8px;
+        text-align: left;
     }
 }
 

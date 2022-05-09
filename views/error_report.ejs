@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Zogori</title>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <script>
+            function copyDivToClipboard(idName) {
+                var range = document.createRange();
+                range.selectNode(document.getElementById(idName));
+                window.getSelection().removeAllRanges(); // clear current selection
+                window.getSelection().addRange(range); // to select text
+                document.execCommand("copy");
+                window.getSelection().removeAllRanges();// to deselect
+
+                if(idName=="format_info") window.alert("오류 보고 양식이 복사되었습니다.")
+                else window.alert("클릭한 이메일이 복사되었습니다.")
+            }
+        </script>
+    </script>
+    <body>
+        <!-- header -->
+        <div id="header">
+            <div class="header_container">
+                <h1><a href="/">ZOGORI</a></h1>
+            </div>
+        </div>
+
+        <!-- container, menu bar and main screen -->
+        <div id="container">
+            <nav class="container_menu">
+                <ul class="menu">
+                    <li class="menu_item"><a href="/">Evaluation</a></li>
+                    <li class="menu_item"><a href="/error_report">Error Report</a></li>
+                    <li class="menu_item"><a href="/about">About</a></li>
+                </ul>
+            </nav>
+
+            <div class="container_main">
+                <div class="error_report">
+                    <h2>ERROR REPORT</h2>
+                    
+                    <table id="contact">
+                        <thead>
+                            <tr>
+                                <th class="name">
+                                    이름
+                                </th>
+                                <th class="in_charge">
+                                    
+                                </th>
+                                <th class="email">
+                                    이메일
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="name">
+                                    조환규
+                                </td>
+                                <td class="in_charge">
+                                    담당 교수
+                                </td>
+                                <td id="email1" onclick="copyDivToClipboard('email1')" class="email">
+                                    hgcho@pusan.ac.kr
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="name">
+                                    고수연
+                                </td>
+                                <td class="in_charge">
+                                    c++ 담당
+                                </td>
+                                <td id="email2" onclick="copyDivToClipboard('email2')" class="email">
+                                    kosy1782@gmail.com
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="name">
+                                    윤민석
+                                </td>
+                                <td class="in_charge">
+                                    python 담당
+                                </td>
+                                <td id="email3" onclick="copyDivToClipboard('email3')" class="email">
+                                    aszx4280@gmail.com
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="copy_info">* click each email box to copy email</p>
+
+                    <br>
+                    <p class="format">오류 보고 양식</p>
+                    <div id="format_info" onclick="copyDivToClipboard('format_info')">     
+                        * 오류 내용 : (상세하게 기술)<br><br>
+                        * 오류 발생 날짜 및 시각 : <br><br>
+                        * 스크린샷 : <br><br>
+                        * (필요 시 코드 첨부)
+                    </div>
+                    <p class="copy_info">* click box to copy format</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- footer -->
+        <div id="footer"></div>
+    </body>
+</html>
