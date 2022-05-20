@@ -2,8 +2,7 @@ import cpp_complexity as cppcom
 import py_complexity as pycom
 import sys
 
-# file_name = sys.argv[1]
-file_name = "iron.cpp"
+file_name = sys.argv[1]
 file_type = file_name.split('.')[-1]
 
 
