@@ -206,20 +206,30 @@ def cal_complexity(file_name):
 
 
 
-    print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
-    <tr><td>Program length</td><td>{length}</td></tr>
-    <tr><td>Estimated program length</td><td>{estimated_length}</td></tr>
-    <tr><td>Volume</td><td>{volume}</td></tr>
-    <tr><td>Difficulty</td><td>{difficulty}</td></tr>
-    <tr><td>Effort</td><td>{effort}</td></tr>
-    <tr><td>Functions</td><td>{len(functionValue)}: {functionValue}</td></tr>
-    <tr><td>total nb of Functions</td><td>{functionNumber}</td></tr>
-    <tr><td>Variables</td><td>{len(variableValue)}: {variableValue}</td></tr>
-    <tr><td>total nb of Variables</td><td>{variable}</td></tr>
-    <tr><td>Depth</td><td>{maxdepth}: {treeString}</td></tr>
-    <tr><td>CCM</td><td>{CCM}</td></tr>
-    <tr><td>LOC</td><td>{LOC}</td></tr>
-    <tr><td>Elegance</td><td>{elegance}</td></tr>''')
+    # print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
+    # <tr><td>Program length</td><td>{length}</td></tr>
+    # <tr><td>Estimated program length</td><td>{estimated_length}</td></tr>
+    # <tr><td>Volume</td><td>{volume}</td></tr>
+    # <tr><td>Difficulty</td><td>{difficulty}</td></tr>
+    # <tr><td>Effort</td><td>{effort}</td></tr>
+    # <tr><td>Functions</td><td>{len(functionValue)}: {functionValue}</td></tr>
+    # <tr><td>total nb of Functions</td><td>{functionNumber}</td></tr>
+    # <tr><td>Variables</td><td>{len(variableValue)}: {variableValue}</td></tr>
+    # <tr><td>total nb of Variables</td><td>{variable}</td></tr>
+    # <tr><td>Depth</td><td>{maxdepth}: {treeString}</td></tr>
+    # <tr><td>CCM</td><td>{CCM}</td></tr>
+    # <tr><td>LOC</td><td>{LOC}</td></tr>
+    # <tr><td>Elegance</td><td>{elegance}</td></tr>''')
 
-    return 0
+    complexity = {
+        "distinct_func": functionValue,
+        "distinct_var": variableValue,
+        "number_func": functionNumber,
+        "number_var": variable,
+        "depth": maxdepth,
+        "LOC": LOC,
+        "elegance": elegance,
+    }
+
+    return complexity
 
