@@ -177,7 +177,7 @@ def cal_complexity(file_name):
     # print(((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1))
     # print((V + Vd + Vd/V + F + Fd + Fd/F+LOC)**math.log(D+1))
     # print(((V + Vd + Vd/V + F + Fd + Fd/F+LOC)/100)**math.log(D+1))
-    elegancy = ((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1)
+    elegance = ((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1)
 
 
     # print("Program vocabulary : ", vocabulary)
@@ -219,7 +219,7 @@ def cal_complexity(file_name):
     <tr><td>Depth</td><td>{maxdepth}: {treeString}</td></tr>
     <tr><td>CCM</td><td>{CCM}</td></tr>
     <tr><td>LOC</td><td>{LOC}</td></tr>
-    <tr><td>Elegancy</td><td>{elegancy}</td></tr>''')
+    <tr><td>Elegance</td><td>{elegance}</td></tr>''')
 
     return 0
 

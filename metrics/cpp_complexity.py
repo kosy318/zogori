@@ -135,7 +135,7 @@ def cal_complexity(file_name):
     difficulty = (n_1 / 2) * (N_2 / n_2)
     effort = difficulty * volume
 
-    def cal_elegancy(res):
+    def cal_elegance(res):
         eleg = res['number_var'] + len(res['distinct_var']) + len(res['distinct_var']) / res['number_var']
         eleg += res['number_func'] + len(res['distinct_func']) + len(res['distinct_func']) / res['number_func']
         eleg += res['LOC']
@@ -150,9 +150,9 @@ def cal_complexity(file_name):
         "number_var": len(result['ID']),
         "depth": depth,
         "LOC": LOC,
-        "elegancy": 0,
+        "elegance": 0,
     }
 
-    complexity['elegancy'] = cal_elegancy(complexity)
+    complexity['elegance'] = cal_elegance(complexity)
 
     return complexity

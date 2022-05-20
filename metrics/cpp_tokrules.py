@@ -102,7 +102,7 @@ def t_for(t):
 
 
 id = r'[a-zA-Z_][a-zA-Z_0-9]*'
-variable = r'([a-zA-Z]+<.*>[*]?[\s]*' + id + ')|([a-zA-Z]+[\s]<.*>[*]?[\s]*' + id + ')|([a-zA-Z]+[*]?' + '\s' + id + ')'
+variable = r'([a-zA-Z]+<.*>[*]?[\s]*' + id + ')|([a-zA-Z]+[\s]<.*>[*]?[\s]*' + id + ')|([a-zA-Z]+[*]?' + '[\s]*' + id + ')'
 function = r'([.]?' + id + '[\s]*\()|(\.' + id + ')|(cin)|(cout)'
 function_declaration = r'' + variable + '\('
 
