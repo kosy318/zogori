@@ -103,7 +103,7 @@ h1 a:visited {
 .container_main {
     display: block;
     position: absolute;
-    padding: 100px;
+    padding-top: 50px;
     margin: 0px;
     text-align: center;
     width: 100%;
@@ -145,7 +145,7 @@ h1 a:visited {
 .upload {
     background-color: var(--color-grey);
     width: fit-content;
-    margin: 16px;
+    margin: 5px;
     margin-top: 8px;
     padding: 4px;
     border-radius: 5px;
