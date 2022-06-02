@@ -6,13 +6,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Zogori</title>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/css/style.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
+
+    <% alertFlag = 0; %>
+    <% if(alertFlag == "1"){ %>
+    <% alert("testing")}; %>
     <body>
         <!-- header -->
         <div id="header">
@@ -26,8 +27,8 @@
             <nav class="container_menu">
                 <ul class="menu">
                     <li class="menu_item"><a href="/">Evaluation</a></li>
-                    <li class="menu_item"><a>QnA</a></li>
-                    <li class="menu_item"><a>About</a></li>
+                    <li class="menu_item"><a href="/error_report">Error Report</a></li>
+                    <li class="menu_item"><a href="/about">About</a></li>
                 </ul>
             </nav>
 
@@ -36,65 +37,28 @@
                     <h2>RESULT</h2>
                 </div>
                 <!-- upload button -->
-                <form
-                    action="/uploadFileWithOriginalFilename"
-                    enctype="multipart/form-data"
-                    method="post"
-                >
+                <form action="/uploadFileWithOriginalFilename" enctype="multipart/form-data" method="post">
                     <div class="languageSelect">
                         <span>Select Language</span>
-                        <label
-                            ><input
-                                type="radio"
-                                value="c/c++"
-                                name="language"
-                                checked
-                            />c/c++</label
-                        >
-                        <label
-                            ><input
-                                type="radio"
-                                value="python"
-                                name="language"
-                            />python</label
-                        >
+                        <label><input type="radio" value="c/c++" name="language" checked />c/c++</label>
+                        <label><input type="radio" value="python" name="language" />python</label>
                     </div>
                     <div>
                         <!-- upload button -->
-                        <input
-                            class="upload"
-                            type="file"
-                            name="attachment"
-                            accept=".c, .cpp, .py"
-                        />
-                        <button type="submit" class="btn btn-primary">
-                            Evaluate
-                        </button>
+                        <input class="upload" type="file" name="attachment" accept=".c, .cpp, .py" />
+                        <button type="submit" class="btn btn-primary">Evaluate</button>
                     </div>
-                    <p style="font-size: smaller; margin: 0%">
-                        * Don't put file contains Korean
-                    </p>
+                    <p style="font-size: smaller; margin: 0%">* Don't put file contains Korean</p>
                 </form>
                 <div class="score">
                     <div class="size scoreContainer">
                         <table>
                             <tr>
-                                <td
-                                    colspan="2"
-                                    style="
-                                        border: 0px;
-                                        font-weight: bold;
-                                        text-align: center;
-                                    "
-                                >
-                                    < <%- filename.split('__')[1] %> >
-                                </td>
+                                <td colspan="2" style="border: 0px; font-weight: bold; text-align: center">< <%- filename.split('__')[1] %> ></td>
                             </tr>
                             <tr class="fileSize">
                                 <th>file size</th>
-                                <td style="border: 0px">
-                                    <%- filesize %> Bytes
-                                </td>
+                                <td style="border: 0px"><%- filesize %> Bytes</td>
                             </tr>
                             <tr>
                                 <th colspan="2">complexity</th>

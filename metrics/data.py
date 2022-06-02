@@ -31,7 +31,7 @@ def make_excel():
             temp_dic['number_var'].append(result['number_var'])
             temp_dic['depth'].append(result['depth'])
             temp_dic['loc'].append(result['LOC'])
-            temp_dic['elegance'].append(result['elegancy'])
+            temp_dic['elegance'].append(result['elegance'])
 
         df = pd.DataFrame(temp_dic)
         df.to_excel(writer, sheet_name=i,index=False)

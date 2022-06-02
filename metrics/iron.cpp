@@ -1,115 +1,67 @@
-#include <iostream>
-// #include <algorithm>
+#include <bits/stdc++.h>
 
-// #pragma warning(disable: 4996)
+#ifdef LOCAL
+    #define watch(x) cout<<(#x)<<" is "<<(x)<<'\n'
+    #define dashline() cout<<"================\n"
+#else
+    #define watch(x)
+    #define dashline()
+#endif // LOCAL
 
 using namespace std;
 
-/*
-#include <iostream>
-#include <algorithm>
-using namespace std;
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pii;
 
-int cost[101], dp[10001][15001];
-pair<int, int> se[10001];
-int M, N, s, e, t, max_time, ms, me;
+const int MX=2e9;
 
-int Max(int x, int y){
-    return x>y?x:y;
-}
-
-int main(){
-    cin>>M>>N;
-    for(int i=1; i<=M; i++){
-        cin>>cost[i];
-    }
-
-    for(int i=1; i<=N; i++){
-        cin>>se[i].second>>se[i].first>>t;
-    }
-    sort(se+1, se+1+N);
-
-    for(int i=1; i<=N; i++){
-        for(int j=1; j<se[i].first; j++){
-            if(se[i].second>j) dp[i][j]=dp[i-1][j];
-            else {
-                dp[i][j]=dp[i-1][j];
-                for(int k=1; k<i; k++){
-                    if(se[k].first<=se[i].second){
-                        dp[i][j]=Max(dp[i][j], dp[k][se[k].first - 1] + (j-se[i].second+1)*cost[t]);
-                        if(se[i].second==7) cout<<dp[i][j]<<'\n';
-                    }
-                }
-                dp[i][j]=Max(dp[i][j], (j-se[i].second+1)*cost[t]);
-            }
-            max_time=Max(max_time, dp[i][j]);
-            cout<<dp[i][j]<<' ';
-        }
-        cout<<'\n';
-    }
-
-    cout<<max_time<<'\n';
-
-    return 0;
-}*/
+int price[111];
+int n,m;
+pair<pii,int> arr[10011];
 
 int main()
 {
-    int m, n, i;
-    int result = 0;
-    int point[100000];
-    int color[100000];
-    int index[100000];
-
-    cin >> m >> n;
-
-    for(i=0;i<n;i++)
-        cin >> point[i];
-    for(i=0;i<n;i++)
-        cin >> color[i];
-
-    if(color[0] != color[1])
-        result++;
-    index[0] = 1;
-
-    for(i=1;i<n-1;i++)
+    cin.tie(0); cout.tie(0);
+    ios::sync_with_stdio(0);
+    freopen("input3.txt","r",stdin);
+    cin>>m>>n;
+    int i;
+    for(i=1;i<=m;i++) cin>>price[i];
+    for(i=1;i<=n;i++)
     {
-        if((point[i] - point[i-1]) > (point[i+1] - point[i]))
+        cin>>arr[i].first.first>>arr[i].first.second>>arr[i].second;
+    }
+    sort(arr+1,arr+1+n);
+    arr[n+1].first.first=MX;
+
+    int d[15011]={};
+    int id=1;
+    int cur;
+    int e,v;
+    for(i=1;i<=15000;i++)
+    {
+        d[i]=max(d[i],d[i-1]);
+        //watch(d[i]);
+        cur=arr[id].first.first;
+        //watch(id);
+        //watch(i);
+        //dashline();
+        if (i<cur) continue;
+        while(cur==i)
         {
-            index[i] = i+1;
-            if (color[i] != color[i+1])
-                result++;
-        }
-        else if((point[i]-point[i-1]) == (point[i+1] - point[i]))
-        {
-            int count = 0;
-            if (color[i] != color[i-1])
-            {
-                result++;
-                continue;
-            }
-            while(1)
-            {
-                if (color[i] != color[i-1])
-                    break;
-                if (point[i] - point[i-1] == point[i+1] - point[i])
-                    count++;
-                if(count%2==0)
-                    result++;
-                i++;
-            }
-        }
-        else
-        {
-            index[i] = i-1;
-            if (color[i] != color[i-1])
-                result++;
-            else if (index[i-1] == i)
-                result++;
+
+            e=arr[id].first.second;
+            v=(e-cur)*price[arr[id].second];
+            d[e]=max(d[e],d[i]+v);
+            id++;
+            cur=arr[id].first.first;
         }
     }
-    if(color[n-2] != color[n-1])
-        result++;
-    cout << result << endl;
+
+    cout<<d[15000];
+
     return 0;
 }
+
+int declartion();

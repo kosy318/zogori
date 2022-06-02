@@ -6,18 +6,33 @@ import numpy as np
 import sys
 import chardet
 from collections import deque
+import chardet
 
 def cal_complexity(file_name):
     # Build the lexer
     lexer = lex.lex(module=cpp_tokrules)  # , debug=1)
-    lexer.nested = []
+
+
     data = ''
     LOC = 0
-    # Test it out
-    print(file_name)
+
     rawdata = open(file_name, 'rb').read()
     result = chardet.detect(rawdata)
     enc = result['encoding']
+    with open(file_name, 'r', encoding=enc) as file:
+        # get LOC
+        comment_start = False
+        for line in file.readlines():
+            enter = re.fullmatch("[ \t\n]+", line)
+            one_line_comment = re.match("^[ \t]*//.*", line)
+            if not comment_start:
+                comment_start = re.match("^[ \t]*/(\*).*", line)
+            comment_end = re.match("(.|\n)*?(\*)/.*", line)
+            if not comment_end and comment_start:
+                continue
+            elif comment_end and comment_start:
+                comment_start = False
+                continue
 
     file = open(file_name,'rt',encoding=enc)
 
@@ -42,36 +57,42 @@ def cal_complexity(file_name):
             LOC += 1
     file.close()
     # Give the lexer some input
+
     lexer.input(data)
 
     decision_func = ['IF', 'ELSE_IF', 'WHILE', 'SWITCH', 'FOR']
 
-    result = {'CCM': [], 'NAMESPACE': [], 'DOT_OP': [], 'ID': [], 'TYPE': [], 'FUNCTION': [], }
+    result = {'CCM': [], 'INCLUDE': [], 'NAMESPACE': [], 'DOT_OP': [], 'ID': [], 'TYPE': [], 'FUNCTION': [], }
     # Tokenize
     while True:
         tok = lexer.token()
         if not tok:
             break  # No more input
 
-        # print(tok.type, "\t\t", tok.value, "  \t", tok.lineno)#,tok.lexpos)
+        # result의 해당 token type에 token value 입력
         if tok.type not in result:
             result[tok.type] = [tok.value]
         else:
             result[tok.type].append(tok.value)
 
+        # 변수 선언
         if tok.type == 'VARIABLE':
-            # print(tok.value,': ')
             var = result['VARIABLE'][-1]
 
             if var.split()[0] != 'return' and var.split()[0] != 'goto':
                 result['TYPE'].append(' '.join(var.split()[:-1]))
-            # print(var.split()[:-1], var.split()[-1])
 
             if var.split()[-1] == 'struct':
                 result['TYPE'][-1] = var.split()[-1]
             elif var.split()[-1] != 'main':
-                result['ID'].append(var.split()[-1])
+                if var.split()[-1].split("<<")[0] == "cout":
+                    result['FUNCTION'].append("cout")
+                elif var.split()[-1].split(">>")[0] == "cin":
+                    result['FUNCTION'].append("cin")
+                else:
+                    result['ID'].append(var.split()[-1])
 
+        # ignore continue, break, return
         if tok.type == 'ID' and (tok.value in ['continue', 'break', 'return']):
             result['ID'].pop()
             pass
@@ -83,10 +104,13 @@ def cal_complexity(file_name):
             result['DOT_OP'].append('.')
 
         if tok.type == 'FUNCTION_DECLARATION' and tok.value.split()[0] != 'template':
+            print(tok.value)
             try:
                 result['FUNCTION'].append(tok.value.split()[1][:-1])
             except:
                 pass
+
+    LOC -= (len(result['INCLUDE']) + len(result['NAMESPACE']))
 
     dq = deque()
     depth = 0
@@ -107,13 +131,6 @@ def cal_complexity(file_name):
         else:
             print('<script>window.alert("DEPTH FINDING ERROR")</script>')
 
-    # for keys in result.keys():
-    #     print(f'{keys: <15}{len(result[keys]): <5}<br>')
-    #     for val in result[keys]:
-    #         print(f'{" " * 10}>>   {val}<br>')
-
-    LOC -= (len(result['INCLUDE']) + len(result['NAMESPACE']))
-
     n_1 = 0
     N_1 = 0
     inside_n1 = ['IF', 'ELSE_IF', 'ELSE', 'WHILE', 'SWITCH', 'FOR', 'BRACE', 'RPAREN', 'LINDEX', 'RINDEX', 'FUNCTION',
@@ -132,8 +149,7 @@ def cal_complexity(file_name):
             n_2 += len(set(result[ele]))
             N_2 += len(result[ele])
 
-    # print(f'n_1 = {n_1}, n_2 = {n_2}, N_1 = {N_1}, N_2 = {N_2}<br>')
-    # print(result['TYPE'])
+    # HCM
     vocabulary = n_1 + n_2
     length = N_1 + N_2
     estimated_length = n_1 * math.log2(n_1) + n_2 * math.log2(n_2)
@@ -141,7 +157,11 @@ def cal_complexity(file_name):
     difficulty = (n_1 / 2) * (N_2 / n_2)
     effort = difficulty * volume
 
-    def cal_elegancy(res):
+    def cal_elegance(res):
+        if res['number_var'] == 0:
+            res['number_var'] = 1
+        if res['number_func'] == 0:
+            res['number_func'] = 1
         eleg = res['number_var'] + len(res['distinct_var']) + len(res['distinct_var']) / res['number_var']
         eleg += res['number_func'] + len(res['distinct_func']) + len(res['distinct_func']) / res['number_func']
         eleg += res['LOC']
@@ -156,9 +176,16 @@ def cal_complexity(file_name):
         "number_var": len(result['ID']),
         "depth": depth,
         "LOC": LOC,
-        "elegancy": 0,
+        "elegance": 0,
+
+        "CCM": len(result['CCM']),
+        "length": length,
+        "estimated_length": estimated_length,
+        "volume": volume,
+        "difficulty": difficulty,
+        "effort": effort,
     }
 
-    complexity['elegancy'] = cal_elegancy(complexity)
+    complexity['elegance'] = cal_elegance(complexity)
 
     return complexity

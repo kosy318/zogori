@@ -28,6 +28,14 @@ router.get("/", function (req, res) {
     res.render("upload");
 });
 
+router.get("/error_report", function (req, res) {
+    res.render("error_report");
+});
+
+router.get("/about", function (req, res) {
+    res.render("about");
+});
+
 //파일 업로드 (파일이름유지)
 router.post(
     "/uploadFileWithOriginalFilename",
