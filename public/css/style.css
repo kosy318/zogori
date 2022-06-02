@@ -233,7 +233,7 @@ h1 a:visited {
     padding: 8px 16px 8px 16px;
 }
 
-#contact .email:hover {
+#contact .email_inside:hover {
     text-decoration: underline;
     cursor: pointer;
 }
