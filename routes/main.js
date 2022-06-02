@@ -74,9 +74,7 @@ router.post(
                 res.render("alert", { error: "잘못된 파일 형식입니다" });
             } else {
                 execString =
-                    execString + " uploadedFiles/" + req.files[0].filename + " ";
-
-                execString = execString + " " + language + " ";
+                    execString + " uploadedFiles/" + req.files[0].filename;
                 const fread = exec(
                     execString,
                     function (error, stdout, stderr) {
