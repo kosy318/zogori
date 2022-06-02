@@ -52,6 +52,9 @@ router.post(
             if (req.files[i].filename.search(/\.cpp/) < 0) {
                 errorCheck = 1;
                 res.render("alert", { error: "잘못된 파일 형식입니다." });
+                for(let i = 0; i < fileNumber; i++){
+                    fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
+                }
                 break;
                 }
             }
@@ -71,12 +74,13 @@ router.post(
                             filesize: req.files[0].size,
                             filename: req.files[0].filename,
                         });
+                        for(let i = 0; i < fileNumber; i++){
+                            fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
+                        }
                     }
                 );
             }
-            for(let i = 0; i < fileNumber; i++){
-                fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
-            }
+
         } else if (language == "python") {
             if (req.file.filename.search(/\.py/) < 0) {
 
