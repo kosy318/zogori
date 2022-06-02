@@ -74,6 +74,6 @@ def pred(file_list):
     for i in range(len(test['file'])):
         if y_pred[i] == 2:
             print(
-                f'<tr style="background-color: tomato; color: white;><td">{test["file"][i]}</td><td>{elegance[i]}</td></tr>')
+                f'<tr style="background-color: tomato; color: white;"><td>{test["file"][i]}</td><td>{elegance[i]}</td></tr>')
         else:
             print(f'<tr><td>{test["file"][i]}</td><td>{elegance[i]}</td></tr>')
