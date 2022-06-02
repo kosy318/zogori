@@ -5,6 +5,7 @@ import sys
 
 files = []
 language = sys.argv[1]
+print(language)
 for i in range(2,len(sys.argv)):
     files.append(sys.argv[i])
 # print(type(files))
@@ -14,7 +15,7 @@ if language=="c/c++":
     # complexity = cppcom.cal_complexity(file_name)
     cppmodel.pred(files)
 if language=="python":
-    complexity = pycom.cal_complexity(sys.argv[2])
+    complexity = pycom.cal_complexity(files[0])
 
     print(f'''<tr><td><b>Elegance</b></td><td><b>{complexity['elegance']}</b></td></tr>
     <tr><td>Functions</td><td>{len(complexity['distinct_func'])}</td></tr>

@@ -66,18 +66,17 @@ router.post(
                     fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
                 }
             });
-        
-        }
-        else if (language == "python") {
+        } else if (language == "python") {
             if (req.file.filename.search(/\.py/) < 0) {
                 fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
                 res.render("alert", { error: "잘못된 파일 형식입니다" });
             } else {
-                execString = execString + `uploadedFiles/${req.file.filename}`
+                execString =
+                    execString + `uploadedFiles/${req.files[0].filename}`;
                 const fread = exec(
                     execString,
                     function (error, stdout, stderr) {
-                        fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
+                        fs.unlinkSync(`uploadedFiles/${req.files[0].filename}`);
                         console.log("Error  : ", error);
                         console.log("stderr : ", stderr);
                         console.log("language : ", language);
