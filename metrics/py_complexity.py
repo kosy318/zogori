@@ -4,16 +4,20 @@ import re
 import sys
 import math
 from collections import deque
+import chardet
 
 # Build the lexer
 
-def cal_complexity(file_name):
+def cal_complexity(read_file):
     lexer = lex.lex(module=py_tokrules) #, debug=1)
 
     data = ''
     LOC = 0
-    read_file = sys.argv[1]
-    with open(read_file, 'r', encoding="UTF-8") as file:
+    # read_file = sys.argv[1]
+    rawdata = open(read_file, 'rb').read()
+    result = chardet.detect(rawdata)
+    enc = result['encoding']
+    with open(read_file, 'r', encoding=enc) as file:
         comment_start = False
         comment_end = False
         for line in file.readlines():

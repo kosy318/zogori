@@ -6,7 +6,6 @@ import numpy as np
 import sys
 import chardet
 from collections import deque
-import chardet
 
 def cal_complexity(file_name):
     # Build the lexer
