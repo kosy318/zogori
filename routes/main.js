@@ -47,12 +47,13 @@ router.post(
         let fileNumber = req.files.length;
         console.log("fileNumber  : ", fileNumber);
         let execString = "python3 metrics/main.py";
-        execString = execString + " " + language;
         if (language == "c/c++") {
             for (let i = 0; i < fileNumber; i++) {
                 execString =
                     execString + " uploadedFiles/" + req.files[i].filename;
             }
+
+            execString = execString + " " + language;
             console.log("command string  : ", execString);
             const fread = exec(execString, function (error, stdout, stderr) {
                 console.log("Error  : ", error);
@@ -74,6 +75,8 @@ router.post(
             } else {
                 execString =
                     execString + `uploadedFiles/${req.files[0].filename}`;
+
+                execString = execString + " " + language;
                 const fread = exec(
                     execString,
                     function (error, stdout, stderr) {

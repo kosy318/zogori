@@ -4,9 +4,9 @@ import py_complexity as pycom
 import sys
 
 files = []
-language = sys.argv[1]
+language = sys.argv[-1]
 print(sys.argv)
-for i in range(2,len(sys.argv)):
+for i in range(1,len(sys.argv)-1):
     files.append(sys.argv[i])
 # print(type(files))
 # print(files)
