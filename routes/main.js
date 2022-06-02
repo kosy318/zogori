@@ -46,8 +46,8 @@ router.post(
         let language = req.body.language;
         let fileNumber = req.files.length;
         console.log("fileNumber  : ", fileNumber);
-        let execString = "python3 metrics/main.py";
         if (language == "c/c++") {
+            let execString = "python3 metrics/main.py c/c++ ";
             for (let i = 0; i < fileNumber; i++) {
                 execString =
                     execString + " uploadedFiles/" + req.files[i].filename;
@@ -69,6 +69,7 @@ router.post(
                 }
             });
         } else if (language == "python") {
+            let execString = "python3 metrics/main.py python ";
             if (req.files[0].filename.search(/\.py/) < 0) {
                 fs.unlinkSync(`uploadedFiles/${req.files[0].filename}`);
                 res.render("alert", { error: "잘못된 파일 형식입니다" });
