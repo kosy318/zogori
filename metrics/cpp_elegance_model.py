@@ -34,7 +34,7 @@ def pred(file_list):
         if file.split('.')[-1] == 'cpp' or file.split('.')[-1] == 'c':
             res = cal_complexity(file)
             if res['depth'] != 0:
-                test['file'].append(file.split('/')[-1])
+                test['file'].append(file.split('/')[-1].split('_')[1:])
 
                 test['distinct_func'].append(len(res['distinct_func']))
                 test['distinct_var'].append(len(res['distinct_var']))
