@@ -68,7 +68,7 @@ router.post(
             });
         } else if (language == "python") {
             if (req.file.filename.search(/\.py/) < 0) {
-                fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
+                fs.unlinkSync(`uploadedFiles/${req.files[0].filename}`);
                 res.render("alert", { error: "잘못된 파일 형식입니다" });
             } else {
                 execString =
@@ -82,8 +82,8 @@ router.post(
                         console.log("language : ", language);
                         res.render("result", {
                             output: stdout,
-                            filesize: req.file.size,
-                            filename: req.file.filename,
+                            filesize: req.files[0].size,
+                            filename: req.files[0].filename,
                         });
                     }
                 );

@@ -5,7 +5,7 @@ import sys
 
 files = []
 language = sys.argv[1]
-print(language)
+print(sys.argv)
 for i in range(2,len(sys.argv)):
     files.append(sys.argv[i])
 # print(type(files))
