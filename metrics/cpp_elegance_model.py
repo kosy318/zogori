@@ -7,7 +7,7 @@ from keras.models import load_model
 
 
 def pred(file_list):
-    model = load_model('cpp_elegance_model.h5')
+    model = load_model('metrics/cpp_elegance_model.h5')
 
     # file_list = []
 
