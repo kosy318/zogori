@@ -69,14 +69,15 @@ router.post(
                         console.log("Error  : ", error);
                         console.log("stderr : ", stderr);
                         console.log("language : ", language);
+                        for(let i = 0; i < fileNumber; i++){
+                            fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
+                        }
                         res.render("result", {
                             output: stdout,
                             filesize: req.files[0].size,
                             filename: req.files[0].filename,
                         });
-                        for(let i = 0; i < fileNumber; i++){
-                            fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
-                        }
+
                     }
                 );
             }
