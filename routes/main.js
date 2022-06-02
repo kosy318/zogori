@@ -78,7 +78,6 @@ router.post(
                 const fread = exec(
                     execString,
                     function (error, stdout, stderr) {
-                        fs.unlinkSync(`uploadedFiles/${req.files[0].filename}`);
                         console.log("Error  : ", error);
                         console.log("stderr : ", stderr);
                         console.log("language : ", language);
@@ -87,6 +86,7 @@ router.post(
                             filesize: req.files[0].size,
                             filename: req.files[0].filename,
                         });
+                        fs.unlinkSync(`uploadedFiles/${req.files[0].filename}`);
                     }
                 );
             }
