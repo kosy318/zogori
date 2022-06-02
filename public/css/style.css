@@ -184,6 +184,8 @@ h1 a:visited {
 .score table {
     width: auto;
     margin: auto;
+    padding: 4px;
+    border-collapse: collapse;
 }
 
 .score th {

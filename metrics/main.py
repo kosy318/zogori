@@ -16,7 +16,9 @@ if language == "c/c++":
     print("<tr><td><b>File Name</b></td><td><b>Elegance</b></td></tr>")
     cppmodel.pred(files)
 if language == "py":
+    print(files[0])
     complexity = pycom.cal_complexity(files[0])
+    print(complexity)
 
     print(f'''<tr><td><b>Elegance</b></td><td><b>{complexity['elegance']}</b></td></tr>
     <tr><td>Functions</td><td>{len(complexity['distinct_func'])}</td></tr>

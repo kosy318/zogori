@@ -202,6 +202,6 @@ t_ignore = '. \t\n'
 
 # Error handling rule
 def t_error(t):
-    print('<script>console.log(illegal character "%s")</script>' % t.value[0])
+    print('<script>console.log("illegal character %s")</script>' % t.value[0])
     t.lexer.skip(1)
 
