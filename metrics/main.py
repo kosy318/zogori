@@ -13,6 +13,7 @@ for i in range(2,len(sys.argv)):
 complexity = {}
 if language=="c/c++":
     # complexity = cppcom.cal_complexity(file_name)
+    print("<tr><td><b>File Name</b></td><td><b>Elegance</b></td></tr>")
     cppmodel.pred(files)
 if language=="python":
     complexity = pycom.cal_complexity(files[0])
