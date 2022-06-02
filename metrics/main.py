@@ -5,17 +5,17 @@ import sys
 
 files = []
 language = sys.argv[1]
-print(sys.argv)
-for i in range(2,len(sys.argv)):
+print(language)
+for i in range(2, len(sys.argv)):
     files.append(sys.argv[i])
 # print(type(files))
-# print(files)
+print(files)
 complexity = {}
-if language=="c/c++":
+if language == "c/c++":
     # complexity = cppcom.cal_complexity(file_name)
     print("<tr><td><b>File Name</b></td><td><b>Elegance</b></td></tr>")
     cppmodel.pred(files)
-if language=="py":
+if language == "py":
     complexity = pycom.cal_complexity(files[0])
 
     print(f'''<tr><td><b>Elegance</b></td><td><b>{complexity['elegance']}</b></td></tr>
