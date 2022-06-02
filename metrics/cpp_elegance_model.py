@@ -58,7 +58,7 @@ def pred(file_list):
     col = ['distinct_func', 'distinct_var', 'number_func', 'number_var', 'depth', 'LOC', 'elegance', 'CCM', 'length',
            'estimated_length', 'volume', 'difficulty', 'effort']
 
-    elegance = test['elegance']
+    elegance = test['elegance'].copy()
 
     for c in col:
         c_max = max(test[c])
