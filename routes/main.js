@@ -45,6 +45,7 @@ router.post(
         // const fread = execFile("main.exe",[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
         let language = req.body.language;
         let fileNumber = req.files.length;
+        console.log("fileNumber  : ", fileNumber);
         let errorCheck = 0;
         if (language == "c/c++") {
             for(let i = 0; i < fileNumber; i++){
@@ -55,10 +56,11 @@ router.post(
                 }
             }
             if(errorCheck == 0) {
-                let execString = `python3 metrics/main.py`
+                let execString = 'python3 metrics/main.py'
                 for(let i = 0; i < fileNumber; i++){
-                    execString + ` uploadedFiles/${req.files[i].filename}`
+                    execString = execString + ' uploadedFiles/'+req.files[i].filename
                 }
+                console.log("command string  : ",execString);
                 const fread = exec(
                     execString, function (error, stdout, stderr) {
                         console.log("Error  : ", error);
