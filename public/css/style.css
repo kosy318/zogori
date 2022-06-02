@@ -178,6 +178,7 @@ h1 a:visited {
     /* background-color: var(--color-light-white); */
     border-radius: 10px;
     overflow: hidden;
+    font-size: 0;
 }
 
 .score table {
