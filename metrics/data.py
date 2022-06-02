@@ -37,20 +37,23 @@ def make_excel():
         df.to_excel(writer, sheet_name=i,index=False)
     writer.save()
 
-df_list = []
-def make_df_list(list):
+def read_excel(filename):
+    list = []
     for i in range(len(folderList)):
-        list.append(pd.read_excel('output.xlsx',sheet_name=i,engine='openpyxl'))
+        list.append(pd.read_excel(filename,sheet_name=i,engine='openpyxl'))
+    return list
 
 
-def make_distribution(num, col):
+def make_distribution(list, num, col):
+    plot_max = min(list[num][col])
+    x = list[num][col] == plot_max
+    print(list[num][x])
+    plot_max = max(list[num][col])
+    x = list[num][col] == plot_max
+    print(list[num][x])
 
-    plot_max = max(df_list[num][col])
     plotList = [0 for _ in range(plot_max+5)]
-    for i in df_list[num][col]:
+    for i in list[num][col]:
         plotList[i] += 1
     plt.plot(plotList)
     plt.show()
-make_excel()
-make_df_list(df_list)
-make_distribution(7,'distinct_var')

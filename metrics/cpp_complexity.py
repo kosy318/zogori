@@ -4,37 +4,43 @@ import cpp_tokrules
 import re
 import numpy as np
 import sys
+import chardet
 from collections import deque
-
 
 def cal_complexity(file_name):
     # Build the lexer
     lexer = lex.lex(module=cpp_tokrules)  # , debug=1)
     lexer.nested = []
-
     data = ''
     LOC = 0
     # Test it out
-    with open(file_name, 'r') as file:
-        comment_start = False
-        comment_end = False
-        for line in file.readlines():
-            enter = re.fullmatch("[ \t\n]+", line)
-            one_line_comment = re.match("^[ \t]*//.*", line)
-            if not comment_start:
-                comment_start = re.match("^[ \t]*/(\*).*", line)
-            comment_end = re.match("(.|\n)*?(\*)/.*", line)
-            if not comment_end and comment_start:
-                continue
-            elif comment_end and comment_start:
-                comment_end = False
-                comment_start = False
-                continue
+    print(file_name)
+    rawdata = open(file_name, 'rb').read()
+    result = chardet.detect(rawdata)
+    enc = result['encoding']
 
-            if not enter and not one_line_comment:
-                data += line
-                LOC += 1
+    file = open(file_name,'rt',encoding=enc)
 
+    print(file_name)
+    comment_start = False
+    comment_end = False
+    for line in file.readlines():
+        enter = re.fullmatch("[ \t\n]+", line)
+        one_line_comment = re.match("^[ \t]*//.*", line)
+        if not comment_start:
+            comment_start = re.match("^[ \t]*/(\*).*", line)
+        comment_end = re.match("(.|\n)*?(\*)/.*", line)
+        if not comment_end and comment_start:
+            continue
+        elif comment_end and comment_start:
+            comment_end = False
+            comment_start = False
+            continue
+
+        if not enter and not one_line_comment:
+            data += line
+            LOC += 1
+    file.close()
     # Give the lexer some input
     lexer.input(data)
 
