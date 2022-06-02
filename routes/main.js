@@ -53,7 +53,6 @@ router.post(
                     execString + " uploadedFiles/" + req.files[i].filename;
             }
 
-            execString = execString + " " + language;
             console.log("command string  : ", execString);
             const fread = exec(execString, function (error, stdout, stderr) {
                 console.log("Error  : ", error);
