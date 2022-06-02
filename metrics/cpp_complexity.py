@@ -5,6 +5,7 @@ import re
 import numpy as np
 import sys
 from collections import deque
+import chardet
 
 
 def cal_complexity(file_name):
@@ -13,7 +14,11 @@ def cal_complexity(file_name):
 
     data = ''
     LOC = 0
-    with open(file_name, 'r') as file:
+
+    rawdata = open(file_name, 'rb').read()
+    result = chardet.detect(rawdata)
+    enc = result['encoding']
+    with open(file_name, 'r', encoding=enc) as file:
         # get LOC
         comment_start = False
         for line in file.readlines():
@@ -133,6 +138,10 @@ def cal_complexity(file_name):
     effort = difficulty * volume
 
     def cal_elegance(res):
+        if res['number_var'] == 0:
+            res['number_var'] = 1
+        if res['number_func'] == 0:
+            res['number_func'] = 1
         eleg = res['number_var'] + len(res['distinct_var']) + len(res['distinct_var']) / res['number_var']
         eleg += res['number_func'] + len(res['distinct_func']) + len(res['distinct_func']) / res['number_func']
         eleg += res['LOC']
@@ -148,6 +157,13 @@ def cal_complexity(file_name):
         "depth": depth,
         "LOC": LOC,
         "elegance": 0,
+
+        "CCM": len(result['CCM']),
+        "length": length,
+        "estimated_length": estimated_length,
+        "volume": volume,
+        "difficulty": difficulty,
+        "effort": effort,
     }
 
     complexity['elegance'] = cal_elegance(complexity)
