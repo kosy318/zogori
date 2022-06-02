@@ -31,31 +31,41 @@ router.get("/", function (req, res) {
 //파일 업로드 (파일이름유지)
 router.post(
     "/uploadFileWithOriginalFilename",
-    uploadWithOriginalFilename.single("attachment"),
+    uploadWithOriginalFilename.array("attachment"),
     function (req, res) {
         //exec file and callback result page
         // const fread = execFile("main.exe",[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
         let language = req.body.language;
-
+        let fileNumber = req.files.length;
+        let errorCheck = 0;
         if (language == "c/c++") {
-            if (req.file.filename.search(/\.cpp/) < 0) {
-                fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
+            for(let i = 0; i < fileNumber; i++){
+            if (req.files[i].filename.search(/\.cpp/) < 0) {
+                errorCheck = 1;
                 res.render("alert", { error: "잘못된 파일 형식입니다." });
-            } else {
+                break;
+                }
+            }
+            if(errorCheck == 0) {
+                let execString = `python3 metrics/main.py`
+                for(let i = 0; i < fileNumber; i++){
+                    execString + ` uploadedFiles/${req.files[i].filename}`
+                }
                 const fread = exec(
-                    `python3 metrics/main.py uploadedFiles/${req.file.filename}`,
-                    function (error, stdout, stderr) {
-                        fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
+                    execString, function (error, stdout, stderr) {
                         console.log("Error  : ", error);
                         console.log("stderr : ", stderr);
                         console.log("language : ", language);
                         res.render("result", {
                             output: stdout,
-                            filesize: req.file.size,
-                            filename: req.file.filename,
+                            filesize: req.files[0].size,
+                            filename: req.files[0].filename,
                         });
                     }
                 );
+            }
+            for(let i = 0; i < fileNumber; i++){
+                fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
             }
         } else if (language == "python") {
             if (req.file.filename.search(/\.py/) < 0) {
