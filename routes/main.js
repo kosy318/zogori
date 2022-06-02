@@ -67,7 +67,7 @@ router.post(
                 }
             });
         } else if (language == "python") {
-            if (req.file.filename.search(/\.py/) < 0) {
+            if (req.files[0].filename.search(/\.py/) < 0) {
                 fs.unlinkSync(`uploadedFiles/${req.files[0].filename}`);
                 res.render("alert", { error: "잘못된 파일 형식입니다" });
             } else {
