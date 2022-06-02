@@ -46,7 +46,8 @@ router.post(
         let language = req.body.language;
         let fileNumber = req.files.length;
         console.log("fileNumber  : ", fileNumber);
-        let execString = "python3 metrics/main.py " + language;
+        let execString = "python3 metrics/main.py";
+        execString = execString + " " + language;
         if (language == "c/c++") {
             for (let i = 0; i < fileNumber; i++) {
                 execString =
