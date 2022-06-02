@@ -48,11 +48,22 @@ router.post(
         console.log("fileNumber  : ", fileNumber);
         let errorCheck = 0;
         if (language == "c/c++") {
-            for(let i = 0; i < fileNumber; i++){
-            if (req.files[i].filename.search(/\.cpp/) < 0) {
-                errorCheck = 1;
-                res.render("alert", { error: "잘못된 파일 형식입니다." });
-                for(let i = 0; i < fileNumber; i++){
+            let execString = "python3 metrics/main.py";
+            for (let i = 0; i < fileNumber; i++) {
+                execString =
+                    execString + " uploadedFiles/" + req.files[i].filename;
+            }
+            console.log("command string  : ", execString);
+            const fread = exec(execString, function (error, stdout, stderr) {
+                console.log("Error  : ", error);
+                console.log("stderr : ", stderr);
+                console.log("language : ", language);
+                res.render("result", {
+                    output: stdout,
+                    filesize: req.files[0].size,
+                    filename: req.files[0].filename,
+                });
+                for (let i = 0; i < fileNumber; i++) {
                     fs.unlinkSync(`uploadedFiles/${req.files[i].filename}`);
                 }
                 break;
@@ -82,13 +93,12 @@ router.post(
                 );
             }
 
+            });
         } else if (language == "python") {
             if (req.file.filename.search(/\.py/) < 0) {
-
-                    fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
-                    res.render("alert", { error: "잘못된 파일 형식입니다" });
-                }
-            else {
+                fs.unlinkSync(`uploadedFiles/${req.file.filename}`);
+                res.render("alert", { error: "잘못된 파일 형식입니다" });
+            } else {
                 const fread = exec(
                     `python3 metrics/main.py uploadedFiles/${req.file.filename}`,
                     function (error, stdout, stderr) {

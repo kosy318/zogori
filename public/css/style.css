@@ -233,6 +233,11 @@ h1 a:visited {
     padding: 8px 16px 8px 16px;
 }
 
+#contact .email_inside:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .format {
     margin-top: 24px;
     margin-bottom: 8px;
@@ -249,7 +254,7 @@ h1 a:visited {
 }
 
 #format_info:hover {
-    background-color: var(--color-light-grey);
+    background-color: var(--color-light-white);
 }
 
 .copy_info {
