@@ -29,12 +29,14 @@ def pred(file_list):
         "effort": [],
     }
 
+    elegance = []
+
     for file in file_list:
         res = {}
         if file.split('.')[-1] == 'cpp' or file.split('.')[-1] == 'c':
             res = cal_complexity(file)
             if res['depth'] != 0:
-                test['file'].append(file.split('/')[-1].split('_')[1:])
+                test['file'].append('_'.join(file.split('/')[-1].split('_')[1:]))
 
                 test['distinct_func'].append(len(res['distinct_func']))
                 test['distinct_var'].append(len(res['distinct_var']))
@@ -56,6 +58,8 @@ def pred(file_list):
     col = ['distinct_func', 'distinct_var', 'number_func', 'number_var', 'depth', 'LOC', 'elegance', 'CCM', 'length',
            'estimated_length', 'volume', 'difficulty', 'effort']
 
+    elegance = test['elegance']
+
     for c in col:
         c_max = max(test[c])
         for i in range(len(test[c])):
@@ -70,6 +74,6 @@ def pred(file_list):
     for i in range(len(test['file'])):
         if y_pred[i] == 2:
             print(
-                f'<tr><td style="background-color: tomato; color: white;">{test["file"][i]}</td><td>{test["elegance"][i]}</td></tr>')
+                f'<tr style="background-color: tomato; color: white;><td">{test["file"][i]}</td><td>{elegance[i]}</td></tr>')
         else:
-            print(f'<tr><td>{test["file"][i]}</td><td>{test["elegance"][i]}</td></tr>')
+            print(f'<tr><td>{test["file"][i]}</td><td>{elegance[i]}</td></tr>')
