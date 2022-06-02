@@ -6,8 +6,8 @@ import sys
 files = []
 for i in range(1:len(sys.argv)):
     files.append(sys.argv[i])
-
-
+print(type(files))
+print(files)
 complexity = {}
 # complexity = cppcom.cal_complexity(file_name)
 cppmodel.pred(files)
