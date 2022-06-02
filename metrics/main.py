@@ -4,7 +4,7 @@ import py_complexity as pycom
 import sys
 
 files = []
-for i in range(1:len(sys.argv)):
+for i in range(1,len(sys.argv)):
     files.append(sys.argv[i])
 print(type(files))
 print(files)
