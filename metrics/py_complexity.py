@@ -177,27 +177,8 @@ def cal_complexity(read_file):
     F = len(functionValue)
     Fd = functionNumber
     D = maxdepth
-    # print((V + Vd + Vd/V + F + Fd + Fd/F)**math.log(D+1))
-    # print(((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1))
-    # print((V + Vd + Vd/V + F + Fd + Fd/F+LOC)**math.log(D+1))
-    # print(((V + Vd + Vd/V + F + Fd + Fd/F+LOC)/100)**math.log(D+1))
+
     elegance = ((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1)
-
-
-    # print("Program vocabulary : ", vocabulary)
-    # print("Program length : ", length)
-    # print("Estimated program length : ", estimated_length)
-    # print("Difficulty : ", difficulty)
-    # print("Effort : ", effort)
-    # print("Functions : ", len(functionValue), functionValue)
-    # print("total nb of Functions : ", volume)
-    # print("Volume : ", functionNumber)
-    # print("Variables : ", len(variableValue),variableValue)
-    # print("nb of Variables : ", variable)
-    # print("Depth : ",maxdepth, treeString)
-    # print("CCM : ", CCM)
-    # print("LOC : ", LOC)
-
 
     n_1,n_2 = operator, operand
     N_1, N_2 = len(operatorType), len(operandType)
@@ -209,21 +190,6 @@ def cal_complexity(read_file):
     effort = difficulty * volume
 
 
-
-    # print(f'''<tr><td>Program vocabulary</td><td>{vocabulary}</td></tr>
-    # <tr><td>Program length</td><td>{length}</td></tr>
-    # <tr><td>Estimated program length</td><td>{estimated_length}</td></tr>
-    # <tr><td>Volume</td><td>{volume}</td></tr>
-    # <tr><td>Difficulty</td><td>{difficulty}</td></tr>
-    # <tr><td>Effort</td><td>{effort}</td></tr>
-    # <tr><td>Functions</td><td>{len(functionValue)}: {functionValue}</td></tr>
-    # <tr><td>total nb of Functions</td><td>{functionNumber}</td></tr>
-    # <tr><td>Variables</td><td>{len(variableValue)}: {variableValue}</td></tr>
-    # <tr><td>total nb of Variables</td><td>{variable}</td></tr>
-    # <tr><td>Depth</td><td>{maxdepth}: {treeString}</td></tr>
-    # <tr><td>CCM</td><td>{CCM}</td></tr>
-    # <tr><td>LOC</td><td>{LOC}</td></tr>
-    # <tr><td>Elegance</td><td>{elegance}</td></tr>''')
 
     complexity = {
         "distinct_func": functionValue,

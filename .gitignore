@@ -2,8 +2,4 @@ node_modules
 uploadedFiles
 metrics/SORTED_BY_PROBLEMS/
 metrics/submission/
-metrics/ml_labeled_data.xlsx
-metrics/ml_labeled_data2.xlsx
-metrics/ml_pre_data.xlsx
-metrics/ml_pre_data2.xlsx
-metrics/~$ml_labeled_data2.xlsx
+metrics/__pycache__/
