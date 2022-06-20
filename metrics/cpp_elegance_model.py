@@ -4,12 +4,11 @@ from cpp_complexity import cal_complexity
 import pandas as pd
 import numpy as np
 from keras.models import load_model
+from sklearn.preprocessing import StandardScaler
 
 
 def pred(file_list):
     model = load_model('metrics/cpp_elegance_model.h5')
-
-    # file_list = []
 
     test = {
         "file": [],
@@ -29,10 +28,8 @@ def pred(file_list):
         "effort": [],
     }
 
-    elegance = []
 
     for file in file_list:
-        res = {}
         if file.split('.')[-1] == 'cpp' or file.split('.')[-1] == 'c':
             res = cal_complexity(file)
             if res['depth'] != 0:
@@ -62,7 +59,6 @@ def pred(file_list):
 
 
     # standardization
-    from sklearn.preprocessing import StandardScaler
     scale = StandardScaler()
     for c in col:
         test[c] = scale.fit_transform(pd.DataFrame(test[c])).transpose().tolist()[0]
