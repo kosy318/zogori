@@ -5,11 +5,11 @@ import sys
 
 files = []
 language = sys.argv[1]
-print(language)
+# print(language)
 for i in range(2, len(sys.argv)):
     files.append(sys.argv[i])
 # print(type(files))
-print(files)
+# print(files)
 complexity = {}
 if language == "c/c++":
     # complexity = cppcom.cal_complexity(file_name)
