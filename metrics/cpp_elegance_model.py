@@ -60,14 +60,21 @@ def pred(file_list):
 
     elegance = test['elegance'].copy()
 
+
+    # standardization
+    from sklearn.preprocessing import StandardScaler
+    scale = StandardScaler()
     for c in col:
-        c_max = max(test[c])
-        for i in range(len(test[c])):
-            test[c][i] = test[c][i] / c_max
+        test[c] = scale.fit_transform(pd.DataFrame(test[c])).transpose().tolist()[0]
+
+    # for c in col:
+    #     c_max = max(test[c])
+    #     for i in range(len(test[c])):
+    #         test[c][i] = test[c][i] / c_max
 
     test_df = pd.DataFrame(test)
 
-    X_test = test_df.drop('file', axis=1)
+    X_test = test_df.drop(['file', 'elegance'], axis=1)
     y_pred = model.predict(X_test)
     y_pred = np.argmax(y_pred, axis=1)
 
