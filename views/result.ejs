@@ -11,9 +11,6 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 
-    <% alertFlag = 0; %>
-    <% if(alertFlag == "1"){ %>
-    <% alert("testing")}; %>
     <body>
         <!-- header -->
         <div id="header">
@@ -56,7 +53,7 @@
                             <tr>
                                 <th colspan="2">complexity</th>
                             </tr>
-                            <%- output %>
+                            <tr><td><b>File Name</b></td><td><b><%=output%></b></td></tr>
                         </table>
                     </div>
                 </div>

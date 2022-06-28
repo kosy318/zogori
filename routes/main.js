@@ -41,8 +41,6 @@ router.post(
     "/uploadFileWithOriginalFilename",
     uploadWithOriginalFilename.array("attachment"),
     function (req, res) {
-        //exec file and callback result page
-        // const fread = execFile("main.exe",[`uploadedFiles/${req.file.filename}`],function(error,stdout,stderr){
         let language = req.body.language;
         let fileNumber = req.files.length;
         console.log("fileNumber  : ", fileNumber);
