@@ -35,7 +35,6 @@ def cal_complexity(file_name):
 
     file = open(file_name,'rt',encoding=enc)
 
-    print(file_name)
     comment_start = False
     comment_end = False
     for line in file.readlines():
