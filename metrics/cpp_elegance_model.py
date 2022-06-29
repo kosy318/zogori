@@ -3,7 +3,6 @@ import os
 from cpp_complexity import cal_complexity
 import pandas as pd
 import numpy as np
-import json
 from keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 
@@ -72,20 +71,10 @@ def pred(file_list):
 
 
 
-    json_object = {"label" :[],"file Name":[],"ele":[],"elegance":[]}
-    json_object["label"].extend(["file Name","ele","elegance"])
+    json_object = {"language":"cpp","size":len(test['file']),"file_name":test['file'],"ele_score":[],"elegance":[]}
     for i in range(len(test['file'])):
-        json_object["file Name"].append(test["file"][i])
-        json_object["ele"].append(str(elegance[i]))
+        json_object["ele_score"].append(str(elegance[i]))
         json_object["elegance"].append(str(y_pred[i]))
-    json_string = json.dumps(json_object)
 
-    # for i in range(len(test['file'])):
-    #     if y_pred[i] == 2:
-    #         print(
-    #             f'<tr style="background-color: tomato; color: white;"><td>{test["file"][i]}</td><td>{elegance[i]}</td></tr>')
-    #     else:
-    #         print(f'<tr><td>{test["file"][i]}</td><td>{elegance[i]}</td></tr>')
-
-    return json_string
+    return json_object
 

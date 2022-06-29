@@ -19,8 +19,6 @@ const storage = multer.diskStorage({
 const upload = multer({ dest: "uploadedFiles/" });
 const uploadWithOriginalFilename = multer({ storage: storage });
 
-// const { execFile } = require("child_process");
-// const fread = require("child_process").execFile;
 const { exec } = require("child_process");
 const fread = require("child_process").exec;
 
@@ -56,8 +54,9 @@ router.post(
                 console.log("Error  : ", error);
                 console.log("stderr : ", stderr);
                 console.log("language : ", language);
+                let output = JSON.parse(stdout);
                 res.render("result", {
-                    output: stdout,
+                    output: output,
                     filesize: req.files[0].size,
                     filename: req.files[0].filename,
                 });
@@ -79,8 +78,9 @@ router.post(
                         console.log("Error  : ", error);
                         console.log("stderr : ", stderr);
                         console.log("language : ", language);
+                        let output = JSON.parse(stdout);
                         res.render("result", {
-                            output: stdout,
+                            output: output,
                             filesize: req.files[0].size,
                             filename: req.files[0].filename,
                         });

@@ -50,10 +50,26 @@
                 <div class="score">
                     <div class="size scoreContainer">
                         <table>
-                            <tr>
-                                <th colspan="2">complexity</th>
-                            </tr>
-                            <tr><td><b>File Name</b></td><td><b><%=output%></b></td></tr>
+                            <% if(output.language == "cpp") {%>
+                                <tr><td><b>File Name</b></td><td><b>ele score</b></td></tr>
+                                <% for(let i = 0; i < output.size; i++){ %>
+                                    <% if(output.elegance[i] == '2'){ %>
+                                        <tr style="background-color: tomato; color: white;"><td>
+                                            <%= output.file_name[i] %></td><td><%= output.ele_score[i] %></td></tr>
+                                    <% } else { %>                   
+                                        <tr><td><%= output.file_name[i] %></td><td><%= output.ele_score[i] %></td></tr>
+                                    <% } } } %>
+
+                            <% if(output.language == "py") { %>
+                                <tr><td><b>File Name</b></td><td><b><%= output.file_name %></b></td></tr>
+                                <tr><td><b>ele score</b></td><td><b><%= output.ele_score %></b></td></tr>
+                                <tr><td>Functions</td><td><%= output.distinct_func.length %></td></tr>
+                                <tr><td>total nb of Functions</td><td><%= output.number_func %></td></tr>
+                                <tr><td>Variables</td><td><%= output.distinct_var.length %></td></tr>
+                                <tr><td>total nb of Variables</td><td><%= output.number_var %></td></tr>
+                                <tr><td>Depth</td><td><%= output.depth %></td></tr>
+                                <tr><td>LOC</td><td><%= output.LOC %></td></tr>
+                            <% } %>
                         </table>
                     </div>
                 </div>

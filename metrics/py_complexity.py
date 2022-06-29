@@ -178,7 +178,7 @@ def cal_complexity(read_file):
     Fd = functionNumber
     D = maxdepth
 
-    elegance = ((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D+1)
+    elegance = 100*(((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D))
 
     n_1,n_2 = operator, operand
     N_1, N_2 = len(operatorType), len(operandType)
@@ -192,13 +192,15 @@ def cal_complexity(read_file):
 
 
     complexity = {
+        "file_name":('__'.join(read_file.split('/')[-1].split('__')[1:])),
+        "language":"py",
         "distinct_func": functionValue,
         "distinct_var": variableValue,
         "number_func": functionNumber,
         "number_var": variable,
         "depth": maxdepth,
         "LOC": LOC,
-        "elegance": elegance,
+        "ele_score": elegance,
     }
 
     return complexity
