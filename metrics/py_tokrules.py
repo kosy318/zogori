@@ -1,6 +1,4 @@
 
-# module: tokrules.py
-
 from ply.lex import TOKEN
 
 
@@ -8,7 +6,7 @@ states = (
     ('multistring1', 'exclusive'),
     ('multistring2', 'exclusive'),
 )
-# else 는 분기문 숫자로 고려 X
+
 reserved = {
     'elif':'ELIF',
     'else':'ELSE',
@@ -24,7 +22,6 @@ reserved = {
 
 }
 
-# list of token names. this is always required
 tokens = [
     'ID',
     'NUMBER',
@@ -62,7 +59,7 @@ def t_MODULE(t):
     t.type = reserved.get(t.value,"MODULE")
     return t
 
-# if() 표현 때문에 function보다 우선적으로 걸러내기 위해서 function 상단에 작성
+# Write on top of function to filter out ahead of function because of if() expression
 def t_IF(t):
     r'if'
     t.type = reserved.get(t.value,'IF')

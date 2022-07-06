@@ -113,7 +113,7 @@ variable = r'([a-zA-Z]+[\s]?<.*>[*]?[\s]*' + id + '(\[.*\])?)|([a-zA-Z]+[*]?[\s]
 
 @TOKEN(variable)
 def t_VARIABLE(t):
-    t.value = re.sub(r"[*]", " ", t.value)  # 포인터 제거
+    t.value = re.sub(r"[*]", " ", t.value)  # delete pointer
     t.type = reserved.get(t.value, 'VARIABLE')
     return t
 

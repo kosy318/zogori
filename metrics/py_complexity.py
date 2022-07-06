@@ -6,17 +6,18 @@ import math
 from collections import deque
 import chardet
 
-# Build the lexer
 
 def cal_complexity(read_file):
     lexer = lex.lex(module=py_tokrules) #, debug=1)
 
     data = ''
     LOC = 0
-    # read_file = sys.argv[1]
     rawdata = open(read_file, 'rb').read()
+    
+    # read encoding of data with chardet module
     result = chardet.detect(rawdata)
     enc = result['encoding']
+
     with open(read_file, 'r', encoding=enc) as file:
         comment_start = False
         comment_end = False
@@ -44,9 +45,6 @@ def cal_complexity(read_file):
     brackets = ['BRACKET','BRACE','LPAREN','RPAREN']
     operands =['STRING', 'ID', 'NUMBER']
 
-
-
-
     operatorType = []
     operandType = []
     indentionValue = []
@@ -60,7 +58,6 @@ def cal_complexity(read_file):
     functionNumber = 0
     variable = 0
 
-
     prevLineno = 0
     nowLineno = 0
     depth = 0
@@ -69,7 +66,7 @@ def cal_complexity(read_file):
     indentQueue = deque()
 
 
-    # Tokenize
+    # tokenize and count features
     while True:
         tok = lexer.token()
         if not tok:
@@ -96,7 +93,6 @@ def cal_complexity(read_file):
             prevIndention = nowIndention
             indentionValue.append(tok.value)
 
-        #조건문 세기 CCM
         elif tok.type in conditional:
             CCM += 1
             indentQueue.append(tok.type)
@@ -108,9 +104,7 @@ def cal_complexity(read_file):
             if tok.value not in operatorType:
                 operatorType.append(tok.value)
 
-        #operand ( STRING OR ID OR NUMBER )
         elif tok.type in operands:
-            # 변수만 따로 카운팅 ( ID )
             if tok.type == 'ID':
                 variable += 1
                 if tok.value not in variableValue:
@@ -119,37 +113,29 @@ def cal_complexity(read_file):
             if tok.value not in operandType:
                 operandType.append(tok.value)
         
-        #multistring
         elif tok.type == "MULTISTRING":
             LOC = LOC - tok.value.count('\n') + 1
             operand+=1
             if tok.value not in operandType:
                 operandType.append(tok.value)
 
-        #COMMENT
         elif tok.type == "COMMENT":
             LOC -= 1
 
-        #function operator 점수 1.5
         elif tok.type == 'FUNCTION':
             operator+=1.5
             functionNumber += 1
-            # 왼쪽 소괄호 제거
             funcName = str(tok.value).rstrip("(")
             if funcName not in operatorType:
                 operatorType.append(funcName)
                 if funcName not in functionValue:
                     functionValue.append(funcName)
 
-
-
-        #괄호 0.5(function + 닫는 괄호 => 2)
         elif tok.type in brackets:
             operator+=0.5
             if tok.value not in operatorType:
                 operatorType.append(tok.value)
 
-        #나머지 operator
         else:
             operator += 1
             if tok.value not in operatorType:
@@ -158,19 +144,12 @@ def cal_complexity(read_file):
 
         prevLineno = tok.lineno
 
-
-
-    # indentQueue pop하면서 트리 string 형식으로 표현
+    #draw tree string using Queue
     treeString = ""
     for i in range(len(indentQueue)):
         treeString += indentQueue.popleft()
     for i in range(depth):
         treeString+= ")"
-
-
-    # print("variable : ",variable, " ", variableValue)
-    # print(functionValue)
-    # print(treeString)
 
     V = len(variableValue)
     Vd = variable
@@ -178,7 +157,7 @@ def cal_complexity(read_file):
     Fd = functionNumber
     D = maxdepth
 
-    elegance = 100*(((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D))
+    ele_score = 100*(((V + Vd + Vd/V + F + Fd + Fd/F)/100)**math.log(D))
 
     n_1,n_2 = operator, operand
     N_1, N_2 = len(operatorType), len(operandType)
@@ -189,8 +168,7 @@ def cal_complexity(read_file):
     difficulty = (n_1 / 2) * (N_2 / n_2)
     effort = difficulty * volume
 
-
-
+    #return key-value(dictionary) object to make json easily
     complexity = {
         "file_name":('__'.join(read_file.split('/')[-1].split('__')[1:])),
         "language":"py",
@@ -200,7 +178,7 @@ def cal_complexity(read_file):
         "number_var": variable,
         "depth": maxdepth,
         "LOC": LOC,
-        "ele_score": elegance,
+        "ele_score": ele_score,
     }
 
     return complexity

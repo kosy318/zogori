@@ -67,13 +67,13 @@ def cal_complexity(file_name):
         if not tok:
             break  # No more input
 
-        # result의 해당 token type에 token value 입력
+        # assign token value in the corresponding token type in the result
         if tok.type not in result:
             result[tok.type] = [tok.value]
         else:
             result[tok.type].append(tok.value)
 
-        # 변수 선언
+        # declare variable
         if tok.type == 'VARIABLE':
             var = result['VARIABLE'][-1]
 

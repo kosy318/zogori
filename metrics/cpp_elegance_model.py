@@ -1,10 +1,11 @@
 import os
-
 from cpp_complexity import cal_complexity
 import pandas as pd
 import numpy as np
 from keras.models import load_model
 from sklearn.preprocessing import StandardScaler
+
+# calculate elegance using keras sequential model
 
 def pred(file_list):
     model = load_model('metrics/cpp_elegance_model.h5')
@@ -29,6 +30,7 @@ def pred(file_list):
 
     elegance = []
 
+    # make input vector 
     for file in file_list:
         res = {}
         if file.split('.')[-1] == 'cpp' or file.split('.')[-1] == 'c':
@@ -69,8 +71,7 @@ def pred(file_list):
     y_pred = model.predict(X_test,verbose=0)
     y_pred = np.argmax(y_pred, axis=1)
 
-
-
+    # return key-value(dictionary) object to make json easily
     json_object = {"language":"cpp","size":len(test['file']),"file_name":test['file'],"ele_score":[],"elegance":[]}
     for i in range(len(test['file'])):
         json_object["ele_score"].append(str(elegance[i]))

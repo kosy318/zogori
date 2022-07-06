@@ -4,6 +4,11 @@ import py_complexity as pycom
 import sys
 import json
 
+# call proper metric function using file data
+# maybe it can be used in command line
+# make returned dictionary object json string
+# return that json string to main.js
+
 files = []
 language = sys.argv[1]
 for i in range(2, len(sys.argv)):
