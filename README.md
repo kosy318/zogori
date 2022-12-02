@@ -3,7 +3,7 @@
 
 
 ## Introduction
-
+2021.2.9 ~ 6.30
 
 zogori is a project that computes source code perfection(defined as “elegance”).
 
